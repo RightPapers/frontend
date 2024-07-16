@@ -1,5 +1,3 @@
-import AccuracyDashboard from './_components/AccuracyDashboard';
-
 export default function Result() {
-  return <AccuracyDashboard accuracy={80}/>;
+  return <h1>Result</h1>;
 }
