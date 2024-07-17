@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import MswProvider from '@/components/provider/MswProvider';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,10 +16,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body className={inter.className}>
-        <main className="flex min-w-screen min-h-screen bg-gray-200 justify-center px-5">
-          {children}
+        <main className='min-w-screen flex min-h-screen justify-center bg-gray-200 px-5'>
+          <MswProvider>{children}</MswProvider>
         </main>
       </body>
     </html>
