@@ -1,4 +1,10 @@
 import Image from 'next/image';
+import {
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
+import { Tooltip } from '@radix-ui/react-tooltip';
 
 export default function HistoryCard({
   video_title,
@@ -19,10 +25,28 @@ export default function HistoryCard({
         className='h-20 w-36 rounded-lg object-cover mobile:h-[72px] mobile:w-32'
       />
       <div className='flex flex-col gap-1'>
-        <p className='line-clamp-2 text-xs font-semibold'>{video_title}</p>
-        <p className='line-clamp-1 text-[11px] text-gray-500'>
-          {channel_title}
-        </p>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger>
+              <p className='line-clamp-2 text-left text-xs font-semibold'>
+                {video_title}
+              </p>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className='text-[9px] font-bold'>{video_title}</p>
+            </TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger>
+              <p className='line-clamp-1 text-left text-[11px] text-gray-500'>
+                {channel_title}
+              </p>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className='text-[9px] font-bold'>{channel_title}</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
     </div>
   );
