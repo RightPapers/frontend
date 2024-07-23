@@ -33,8 +33,8 @@ export default function HistoryCards() {
       <div className='flex h-max w-96 cursor-pointer justify-around rounded-3xl bg-white p-4 shadow-md mobile:w-full'>
         {dummyHistory.slice(0, 2).map((history, index) => (
           // TODO: video_title을 id로 교체
-          <Link href={`/result?title=${history.video_title}`}>
-            <HistoryCard key={index} {...history} />
+          <Link key={index} href={`/result?title=${history.video_title}`}>
+            <HistoryCard {...history} />
           </Link>
         ))}
       </div>
