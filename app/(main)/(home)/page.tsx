@@ -1,4 +1,3 @@
-import CardComponent from '@/components/CardComponent';
 import LinkComponent from './_component/LinkComponent';
 
 export default function Home() {
