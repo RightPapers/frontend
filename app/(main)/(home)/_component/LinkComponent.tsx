@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button';
 import InputComponent from './InputComponent';
 import CardComponent from '@/components/CardComponent';
-import MainButton from '@/components/MainButton';
 import LinkHeader from './LinkHeader';
 
 const LinkComponent = () => {
@@ -10,7 +9,7 @@ const LinkComponent = () => {
       <LinkHeader />
       <form className='flex flex-col gap-8'>
         <InputComponent />
-        <MainButton variant='main'>검색</MainButton>
+        <Button variant='main'>검색</Button>
       </form>
     </CardComponent>
   );
