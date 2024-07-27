@@ -6,7 +6,7 @@ import {
 } from '@/components/ui/tooltip';
 import { Tooltip } from '@radix-ui/react-tooltip';
 
-export default function HistoryCard({
+const HistoryCard = ({
   video_title,
   channel_title,
   thumbnails,
@@ -14,7 +14,7 @@ export default function HistoryCard({
   video_title: string;
   channel_title: string;
   thumbnails: string;
-}) {
+}) => {
   return (
     <div className='flex w-36 flex-col gap-4 mobile:w-32'>
       <Image
@@ -50,4 +50,6 @@ export default function HistoryCard({
       </div>
     </div>
   );
-}
+};
+
+export default HistoryCard;

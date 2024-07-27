@@ -18,7 +18,7 @@ const dummyHistory = [
 ];
 
 // TODO: 로컬스토리지가 비어 있을 때의 UI 추가
-export default function HistoryCards() {
+const HistoryCards = () => {
   return (
     <div className='flex flex-col'>
       <div className='flex items-center justify-between'>
@@ -40,4 +40,6 @@ export default function HistoryCards() {
       </div>
     </div>
   );
-}
+};
+
+export default HistoryCards;

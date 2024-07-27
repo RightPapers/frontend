@@ -14,9 +14,7 @@ interface DashboardColor {
   background: string;
 }
 
-export default function AccuracyDashboard({
-  accuracy,
-}: AccuracyDashboardProps) {
+const AccuracyDashboard = ({ accuracy }: AccuracyDashboardProps) => {
   const initialDegree = -135;
   const [rotateDegree, setRotateDegree] = useState<number>(initialDegree);
   const [resultText, setResultText] = useState<string>('');
@@ -82,4 +80,6 @@ export default function AccuracyDashboard({
       </span>
     </div>
   );
-}
+};
+
+export default AccuracyDashboard;
