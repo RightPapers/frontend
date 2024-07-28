@@ -1,5 +1,7 @@
+import FeedbackCard from './_components/FeedbackCard';
+
 const Result = () => {
-  return <h1>Result</h1>;
+  return <FeedbackCard />;
 };
 
 export default Result;
