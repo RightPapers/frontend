@@ -3,6 +3,11 @@
 import CardComponent from '@/components/CardComponent';
 import { Button } from '@/components/ui/button';
 import { FaRegThumbsDown, FaRegThumbsUp } from 'react-icons/fa6';
+import {
+  Dialog,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import FeedbackDialog from './FeedbackDialog';
 
 const FeedbackCard = () => {
   return (
@@ -17,15 +22,15 @@ const FeedbackCard = () => {
         >
           <FaRegThumbsUp className='absolute left-4' size={18} />네
         </Button>
-        <Button
-          variant='icon'
-          onClick={() => {
-            console.log('아니요');
-          }}
-        >
-          <FaRegThumbsDown className='absolute left-4' size={18} />
-          아니요
-        </Button>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant='icon'>
+              <FaRegThumbsDown className='absolute left-4' size={18} />
+              아니요
+            </Button>
+          </DialogTrigger>
+          <FeedbackDialog />
+        </Dialog>
       </div>
     </CardComponent>
   );
