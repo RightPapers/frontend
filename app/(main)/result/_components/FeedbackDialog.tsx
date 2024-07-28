@@ -5,8 +5,10 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
+import { useToast } from '@/components/ui/use-toast';
 
-const FeedbackDialog = () => {
+const FeedbackDialog = ({ setOpen }: { setOpen: (open: boolean) => void }) => {
+  const { toast } = useToast();
   return (
     <DialogContent className='max-w-mobile rounded-xl px-6 py-8 text-xs'>
       <DialogTitle className='text-2xl font-semibold'>
@@ -26,8 +28,14 @@ const FeedbackDialog = () => {
       </p>
       <Button
         variant='main'
+        type='submit'
         onClick={() => {
-          console.log('POST feedback');
+          // TODO: API 연결
+          toast({
+            title: '의견 감사합니다!',
+            description: '귀하의 의견이 성공적으로 전달되었습니다.',
+          });
+          setOpen(false);
         }}
       >
         제출하기
