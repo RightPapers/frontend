@@ -2,12 +2,9 @@
 
 import CardComponent from '@/components/CardComponent';
 import { Button } from '@/components/ui/button';
-import { FaRegThumbsDown, FaRegThumbsUp } from 'react-icons/fa6';
-import {
-  Dialog,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+import { Dialog, DialogTrigger } from '@/components/ui/dialog';
 import FeedbackDialog from './FeedbackDialog';
+import { HiOutlineThumbUp, HiOutlineThumbDown } from 'react-icons/hi';
 
 const FeedbackCard = () => {
   return (
@@ -17,15 +14,15 @@ const FeedbackCard = () => {
         <Button
           variant='icon'
           onClick={() => {
-            console.log('네');
+            console.log('POST feedback');
           }}
         >
-          <FaRegThumbsUp className='absolute left-4' size={18} />네
+          <HiOutlineThumbUp className='absolute left-4' size={22} />네
         </Button>
         <Dialog>
           <DialogTrigger asChild>
             <Button variant='icon'>
-              <FaRegThumbsDown className='absolute left-4' size={18} />
+              <HiOutlineThumbDown className='absolute left-4' size={22} />
               아니요
             </Button>
           </DialogTrigger>

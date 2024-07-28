@@ -1,6 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from '@/components/ui/button';
+import {
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import { Textarea } from '@/components/ui/textarea';
 
 const FeedbackDialog = () => {
   return (
@@ -20,7 +24,14 @@ const FeedbackDialog = () => {
         저희 웹사이트는 사용자로부터 개인 식별 정보를 수집하지 않습니다.
         제공해주신 의견은 서비스 개선을 위해 사용됩니다.
       </p>
-      <Button variant='main'>제출하기</Button>
+      <Button
+        variant='main'
+        onClick={() => {
+          console.log('POST feedback');
+        }}
+      >
+        제출하기
+      </Button>
     </DialogContent>
   );
 };
