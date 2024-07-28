@@ -14,7 +14,6 @@ const FeedbackCard = () => {
   return (
     // TODO: CardComponent를 Result 페이지의 다른 컴포넌트로 교체
     <CardComponent>
-      {/* TODO: 아이콘 버튼 스타일 수정 */}
       <div className='flex justify-around gap-4'>
         <Button
           variant='icon'
