@@ -10,22 +10,23 @@ const getRandomIntBetween = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+const points = [
+  0,
+  getRandomIntBetween(12, 17),
+  getRandomIntBetween(27, 32),
+  getRandomIntBetween(42, 47),
+  getRandomIntBetween(57, 62),
+  getRandomIntBetween(72, 77),
+  getRandomIntBetween(87, 92),
+  99,
+];
+
 export default function LoadingProgress({
   loadingState,
 }: {
   loadingState: LoadingState;
 }) {
   const [progress, setProgress] = useState<number>(0);
-  const points = [
-    0,
-    getRandomIntBetween(12, 17),
-    getRandomIntBetween(27, 32),
-    getRandomIntBetween(42, 47),
-    getRandomIntBetween(57, 62),
-    getRandomIntBetween(72, 77),
-    getRandomIntBetween(87, 92),
-    99,
-  ];
 
   const router = useRouter();
 
@@ -61,7 +62,7 @@ export default function LoadingProgress({
   }, [loadingState]);
 
   return (
-    <div className='bg-world-map flex min-h-[720px] items-center justify-center bg-top bg-no-repeat'>
+    <div className='flex min-h-[720px] items-center justify-center bg-world-map bg-top bg-no-repeat'>
       <div className='relative flex flex-col items-center text-center font-bold text-primary'>
         <span className='z-10'>
           <Logo />
