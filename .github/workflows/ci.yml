@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+          version: 9
+          
+    - name: install dependencies and build
+      run: pnpm install --frozen-lockfile && pnpm run build
+      
+  style:
+    name: Style
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+          version: 9
+          
+    - name: Install dependencies and check style
+      run: pnpm install --frozen-lockfile && pnpm exec prettier --check .
+    
+    
