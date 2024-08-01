@@ -1,14 +1,5 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextResponse } from 'next/server';
 
-type GetResponseData = {
-  message: string;
-};
-
-export async function GET(
-  req: NextApiRequest,
-  res: NextApiResponse<GetResponseData>
-) {
-  res.status(200).json({
-    message: 'GET feedback',
-  });
+export async function GET(request: Request) {
+  return NextResponse.json({ message: 'GET feedback' });
 }
