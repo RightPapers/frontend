@@ -1,13 +1,14 @@
-export async function GET() {
-  return new Response(
-    JSON.stringify({
-      message: 'GET analyze',
-    }),
-    {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-      },
-    }
-  );
+import { NextApiRequest, NextApiResponse } from 'next';
+
+type GetResponseData = {
+  message: string;
+};
+
+export async function GET(
+  req: NextApiRequest,
+  res: NextApiResponse<GetResponseData>
+) {
+  res.status(200).json({
+    message: 'GET analyze',
+  });
 }
