@@ -19,8 +19,19 @@ jobs:
         with:
           version: 9
 
-      - name: install dependencies and build
-        run: pnpm install --frozen-lockfile && pnpm run build
+      - name: Cache pnpm modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
 
   style:
     name: Style
@@ -34,5 +45,16 @@ jobs:
         with:
           version: 9
 
-      - name: Install dependencies and check style
-        run: pnpm install --frozen-lockfile && pnpm exec prettier --check .
+      - name: Cache pnpm modules
+        uses: actions/cache@v3
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check style
+        run: pnpm exec prettier --check .
