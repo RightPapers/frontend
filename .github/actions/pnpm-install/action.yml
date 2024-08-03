@@ -23,7 +23,7 @@ inputs:
   fetch-depth:
     description: Fetch depth for actions/checkout
     required: false
-    default: 1
+    default: 0
 
 runs:
   using: composite
