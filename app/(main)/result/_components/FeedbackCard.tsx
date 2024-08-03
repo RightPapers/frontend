@@ -17,7 +17,7 @@ const FeedbackCard = () => {
       <div className='flex justify-around gap-4'>
         <Button
           variant='icon'
-          className=' bg-primary text-primary-foreground hover:bg-primary/90'
+          className='bg-primary text-primary-foreground hover:bg-primary/90'
           onClick={() => {
             // TODO: API 연결
             toast({

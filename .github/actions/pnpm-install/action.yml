@@ -1,0 +1,52 @@
+# https://github-cdn.pages.dev/dyne/pnpm/blob/main/action.yml
+
+name: setup-pnpm
+description: 🚙 reuse pnpm setup on CI over and over
+
+inputs:
+  node-version:
+    description: Node.js version to use
+    required: false
+    default: current
+  pnpm-version:
+    description: pnpm version to use
+    required: false
+    default: 9
+  working-directory:
+    description: Specify where to run the install command
+    required: false
+    default: .
+  submodules:
+    description: Checkout also submodules
+    required: false
+    default: false
+  fetch-depth:
+    description: Fetch depth for actions/checkout
+    required: false
+    default: 0
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v4
+      with:
+        submodules: ${{ inputs.submodules }}
+        fetch-depth: ${{ inputs.fetch-depth }}
+    - uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+    - uses: pnpm/action-setup@v4
+      with:
+        version: ${{ inputs.pnpm-version }}
+        package_json_file: ${{ inputs.working-directory }}/package.json
+    - run: echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+    - uses: actions/cache@v4
+      with:
+        path: ${{ env.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: ${{ runner.os }}-pnpm-store-
+    - run: pnpm i
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
