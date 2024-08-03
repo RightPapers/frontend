@@ -18,20 +18,18 @@ const ArticleCard = ({
   link: string;
 }) => {
   return (
-    <div className='flex flex-col'>
+    <a href={link} className='flex flex-col space-y-[4px]'>
       <CardComponent>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger>
-              <a href={link} className='flex flex-col space-y-[4px]'>
-                <p className='text-left text-sm font-semibold text-gray-900'>
-                  {source}
-                </p>
-                <p className='text-left text-xs text-gray-500'>{upload_time}</p>
-                <p className='line-clamp-2 text-left text-sm text-gray-900'>
-                  {title}
-                </p>
-              </a>
+              <p className='text-left text-sm font-semibold text-gray-900'>
+                {source}
+              </p>
+              <p className='text-left text-xs text-gray-500'>{upload_time}</p>
+              <p className='line-clamp-2 text-left text-sm text-gray-900'>
+                {title}
+              </p>
             </TooltipTrigger>
             <TooltipContent>
               <p className='text-[13px] font-medium'>{title}</p>
@@ -39,7 +37,7 @@ const ArticleCard = ({
           </Tooltip>
         </TooltipProvider>
       </CardComponent>
-    </div>
+    </a>
   );
 };
 

@@ -2,6 +2,7 @@
 import ArticleCard from './ArticleCard';
 import TitleComponent from '@/components/TitleComponent';
 import { FiPaperclip } from 'react-icons/fi';
+import ArticleIcon from '@/components/icon/articleIcon';
 
 const dummArticles = [
   {
@@ -30,8 +31,8 @@ const ArticleCards = () => {
     <div className='flex flex-col'>
       <div className='z-0 mb-[-7px]'>
         <TitleComponent accuracy={29}>
-          <div className='flex'>
-            <FiPaperclip className='relative top-[5px] mr-[10px]' />
+          <div className='flex gap-2'>
+            <ArticleIcon />
             관련 기사
           </div>
         </TitleComponent>

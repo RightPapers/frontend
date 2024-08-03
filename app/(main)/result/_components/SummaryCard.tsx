@@ -5,6 +5,8 @@ import TitleComponent from '@/components/TitleComponent';
 import { Button } from '@/components/ui/button';
 import { IoAnalytics } from 'react-icons/io5';
 import { useState } from 'react';
+import SummaryIcon from '@/components/icon/summaryIcon';
+import cn from 'classnames';
 
 const dummySummary = {
   summary:
@@ -20,25 +22,28 @@ const SummaryCard = () => {
 
   return (
     <div className='flex flex-col'>
-      <div className='z-0 mb-[-7px]'>
+      <div className='mb-[-7px]'>
         <TitleComponent accuracy={29}>
-          <div className='flex'>
-            <IoAnalytics className='relative top-[1px] mr-[9px] text-2xl' />
+          <div className='flex gap-2'>
+            <SummaryIcon />
             chatGPT 영상 요약
           </div>
         </TitleComponent>
       </div>
-      <div className='z-10 flex w-full justify-center'>
+      <div className='z-10 justify-center'>
         <CardComponent>
           <div>
             <p
-              className={`text-sm text-gray-900 ${isExpanded ? '' : 'line-clamp-2'}`}
+              className={cn(
+                'text-sm text-gray-900',
+                !isExpanded && 'line-clamp-2'
+              )}
             >
               {dummySummary.summary}
             </p>
           </div>
           <Button variant='more' onClick={toggleExpand}>
-            <div className='text-center text-black'>
+            <div className='text-center'>
               <span className='text-orange-400'>{isExpanded ? '▲' : '▼'}</span>{' '}
               {isExpanded ? '접기' : '더보기'}
             </div>
