@@ -1,8 +1,8 @@
 'use client';
+
 import ArticleCard from './ArticleCard';
 import TitleComponent from '@/components/TitleComponent';
 import { FiPaperclip } from 'react-icons/fi';
-import ArticleIcon from '@/components/icon/articleIcon';
 
 const dummArticles = [
   {
@@ -29,10 +29,10 @@ const dummArticles = [
 const ArticleCards = () => {
   return (
     <div className='flex flex-col'>
-      <div className='z-0 mb-[-7px]'>
+      <div className='mb-[-7px]'>
         <TitleComponent accuracy={29}>
-          <div className='flex gap-2'>
-            <ArticleIcon />
+          <div className='flex items-center gap-2'>
+            <FiPaperclip size={22} />
             관련 기사
           </div>
         </TitleComponent>

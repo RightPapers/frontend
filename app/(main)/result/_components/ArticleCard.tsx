@@ -18,18 +18,16 @@ const ArticleCard = ({
   link: string;
 }) => {
   return (
-    <a href={link} className='flex flex-col space-y-[4px]'>
-      <CardComponent>
+    <a href={link}>
+      <CardComponent className='py-5'>
         <TooltipProvider>
           <Tooltip>
-            <TooltipTrigger>
-              <p className='text-left text-sm font-semibold text-gray-900'>
-                {source}
-              </p>
-              <p className='text-left text-xs text-gray-500'>{upload_time}</p>
-              <p className='line-clamp-2 text-left text-sm text-gray-900'>
-                {title}
-              </p>
+            <TooltipTrigger className='flex flex-col gap-2 text-left'>
+              <div>
+                <p className='text-sm font-semibold'>{source}</p>
+                <p className='text-xs text-gray-500'>{upload_time}</p>
+              </div>
+              <p className='line-clamp-2 text-sm'>{title}</p>
             </TooltipTrigger>
             <TooltipContent>
               <p className='text-[13px] font-medium'>{title}</p>

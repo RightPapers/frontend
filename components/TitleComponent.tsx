@@ -1,24 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
+import { useEffect, useState } from 'react';
 
-interface GradientCardProps {
-  accuracy: number;
+interface Gradient {
+  left: string;
+  right: string;
 }
-
-const GradientCard = styled.div<GradientCardProps>`
-  background: ${({ accuracy }) => {
-    if (accuracy <= 30) {
-      return 'linear-gradient(240.22deg, #e73737 0%, #b23232 100%)';
-    } else if (accuracy <= 70) {
-      return 'linear-gradient(240.22deg, #FF9401 0%, #AD6400 100%)';
-    } else {
-      return 'linear-gradient(240.22deg, #054AA8 0%, #002354 100%)';
-    }
-  }};
-  border-radius: 10px;
-  padding: 16px;
-  width: 195px;
-`;
 
 const TitleComponent = ({
   children,
@@ -27,10 +12,39 @@ const TitleComponent = ({
   children: React.ReactNode;
   accuracy: number;
 }) => {
+  const [gradient, setGradient] = useState<Gradient>({
+    left: '',
+    right: '',
+  });
+
+  useEffect(() => {
+    if (accuracy < 30) {
+      setGradient({
+        left: '#e73737',
+        right: '#b23232',
+      });
+    } else if (accuracy <= 70) {
+      setGradient({
+        left: '#FF9401',
+        right: '#AD6400',
+      });
+    } else {
+      setGradient({
+        left: '#054AA8',
+        right: '#002354',
+      });
+    }
+  }, [accuracy]);
+
   return (
-    <GradientCard className='font-medium text-white' accuracy={accuracy}>
+    <div
+      className='w-52 rounded-xl p-4 font-medium text-white'
+      style={{
+        backgroundImage: `linear-gradient(240.22deg, ${gradient.left} 0%, ${gradient.right} 100%)`,
+      }}
+    >
       {children}
-    </GradientCard>
+    </div>
   );
 };
 
