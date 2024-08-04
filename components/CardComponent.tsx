@@ -1,8 +1,20 @@
-import { Card } from './ui/card';
+import { cn } from '@/lib/utils';
+import { Card } from '@/components/ui/card';
 
-const CardComponent = ({ children }: { children: React.ReactNode }) => {
+const CardComponent = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string | undefined;
+}) => {
   return (
-    <Card className='flex h-fit w-full flex-col gap-8 rounded-[20px] p-8 shadow-lg'>
+    <Card
+      className={cn(
+        'flex h-fit w-full flex-col gap-8 rounded-[20px] p-8 shadow-lg',
+        className
+      )}
+    >
       {children}
     </Card>
   );
