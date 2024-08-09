@@ -16,8 +16,14 @@ const formSchema = z.object({
   }),
 });
 
-// TODO: POST 요청하는 함수로 수정
-const fetchData = async () => {
+// TODO: 추후 Flask 서버로부터의 페칭으로 수정
+const fetchData = async (url: string) => {
+  const res = await fetch('api/analyze', {
+    method: 'POST',
+    body: JSON.stringify({ url }),
+  });
+  const result = await res.json();
+  console.log(result);
   // 데이터 페칭이 15초 걸린다고 가정
   await new Promise((resolve) => setTimeout(resolve, 15000));
 };
@@ -33,10 +39,9 @@ const LinkComponent = ({
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    console.log(data);
-    // setLoadingState(LoadingState.start);
-    await fetchData();
-    // setLoadingState(LoadingState.done);
+    setLoadingState(LoadingState.start);
+    await fetchData(data.url);
+    setLoadingState(LoadingState.done);
   };
 
   return (
