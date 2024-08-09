@@ -1,12 +1,13 @@
 import { Button } from '@/components/ui/button';
 import CardComponent from '@/components/CardComponent';
 import LinkHeader from './LinkHeader';
-import { LoadingState } from '@/lib/types';
+import { LoadingState, Result } from '@/lib/types';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Form, FormControl, FormField } from '@/components/ui/form';
 import InputComponent from './InputComponent';
+import { useResultStore } from '@/lib/store';
 
 const youtubeUrlPattern = /^(https?:\/\/)?(www\.)?(youtu\.be|youtube\.com)/;
 
@@ -17,15 +18,18 @@ const formSchema = z.object({
 });
 
 // TODO: 추후 Flask 서버로부터의 페칭으로 수정
-const fetchData = async (url: string) => {
+const fetchData = async (
+  url: string,
+  addResult: (videoId: string, result: Result) => void
+) => {
   const res = await fetch('api/analyze', {
     method: 'POST',
     body: JSON.stringify({ url }),
   });
-  const result = await res.json();
-  console.log(result);
-  // 데이터 페칭이 15초 걸린다고 가정
-  await new Promise((resolve) => setTimeout(resolve, 15000));
+  const result: Result = await res.json();
+  addResult(result.youtube_info.video_id, result);
+  // 데이터 페칭이 12초 걸린다고 가정
+  await new Promise((resolve) => setTimeout(resolve, 12000));
 };
 
 const LinkComponent = ({
@@ -33,6 +37,8 @@ const LinkComponent = ({
 }: {
   setLoadingState: (state: LoadingState) => void;
 }) => {
+  const { addResult } = useResultStore();
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { url: '' },
@@ -40,7 +46,7 @@ const LinkComponent = ({
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     setLoadingState(LoadingState.start);
-    await fetchData(data.url);
+    await fetchData(data.url, addResult);
     setLoadingState(LoadingState.done);
   };
 

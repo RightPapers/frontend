@@ -7,20 +7,20 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   const { url } = await request.json();
 
-  let channel_id;
+  let video_id;
 
   // case 1: https://youtu.be/zWvUFsWMmhY?si=3NpnO-JFL0MOuQ-w
   if (url.includes('youtu.be')) {
-    channel_id = url.split('.be/')[1].split('?')[0];
+    video_id = url.split('.be/')[1].split('?')[0];
   }
   // case 2: https://www.youtube.com/watch?v=zWvUFsWMmhY
   else {
-    channel_id = url.split('v=')[1];
+    video_id = url.split('v=')[1];
   }
-  const thumbnails = `https://img.youtube.com/vi/${channel_id}/sddefault.jpg`;
+  const thumbnails = `https://img.youtube.com/vi/${video_id}/sddefault.jpg`;
 
   const response = await fetch(
-    `http://noembed.com/embed?url=http%3A//www.youtube.com/watch?v=${channel_id}`
+    `http://noembed.com/embed?url=http%3A//www.youtube.com/watch?v=${video_id}`
   );
 
   if (!response.ok) {
@@ -64,8 +64,8 @@ export async function POST(request: Request) {
     ],
     youtube_info: {
       captions: 'captions example',
-      channel_id,
       channel_title: author_name,
+      channel_id: 'UCX6OQ3DkcsbYNE6H8uQQuVA',
       hashtags: [
         '30대',
         'SBS NEWS',
@@ -91,6 +91,7 @@ export async function POST(request: Request) {
       thumbnails,
       upload_date: '2024.08.01',
       video_title: title,
+      video_id,
     },
   });
 }
