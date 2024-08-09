@@ -27,7 +27,6 @@ export const useResultStore = create<ResultState>()(
     }),
     {
       name: 'youtube-results-storage',
-      getStorage: () => localStorage,
     }
   )
 );

@@ -28,3 +28,10 @@ export interface Result {
   related_articles: RelatedArticle[];
   youtube_info: YoutubeInfo;
 }
+
+export interface History {
+  video_id: string;
+  video_title: string;
+  channel_title: string;
+  thumbnails: string;
+}
