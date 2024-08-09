@@ -5,24 +5,33 @@ import FeedbackCard from './_components/FeedbackCard';
 import SummaryCard from './_components/SummaryCard';
 import ArticleCards from './_components/ArticleCards';
 import { useResultStore } from '@/lib/store';
-import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import type { Result } from '@/lib/types';
 
-const Result = () => {
-  const searchParams = useSearchParams();
+const Result = ({
+  searchParams,
+}: {
+  searchParams: { id: string | undefined };
+}) => {
+  const [result, setResult] = useState<Result>();
 
-  const id = searchParams.get('id');
-  const results = useResultStore((state) => state.results);
+  useEffect(() => {
+    const id = searchParams.id;
+    const results = useResultStore.getState().results;
 
-  const result = id
-    ? results.find((result) => result.id === id)
-    : results[results.length - 1] || null;
+    const foundResult = id
+      ? results.find((result) => result.id === id)
+      : results[results.length - 1] || null;
+
+    setResult(foundResult?.result);
+  }, [searchParams]);
 
   // TODO: 잘못된 ID로 접근하는 경우의 UI 추가
   if (!result) {
     return null;
   }
 
-  const { analysis_result, related_articles } = result.result;
+  const { analysis_result, related_articles } = result;
   const accuracy = 100 - analysis_result.fake_possibility;
 
   return (
