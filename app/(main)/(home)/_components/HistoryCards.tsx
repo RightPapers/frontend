@@ -3,14 +3,14 @@
 import HistoryCard from '@/components/HistoryCard';
 import { Button } from '@/components/ui/button';
 import { useResultStore } from '@/lib/store';
-import { History } from '@/lib/types';
+import { YoutubeInfo } from '@/lib/types';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { LiaAngleRightSolid } from 'react-icons/lia';
 
 const HistoryCards = () => {
   const results = useResultStore((state) => state.results);
-  const [histories, setHistories] = useState<History[]>([]);
+  const [histories, setHistories] = useState<YoutubeInfo[]>([]);
 
   useEffect(() => {
     results.slice(0, 2).map((result) => {
