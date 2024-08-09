@@ -5,17 +5,17 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  const { youtube_link } = await request.json();
+  const { url } = await request.json();
 
   let channel_id;
 
   // case 1: https://youtu.be/zWvUFsWMmhY?si=3NpnO-JFL0MOuQ-w
-  if (youtube_link.includes('youtu.be')) {
-    channel_id = youtube_link.split('.be/')[1].split('?')[0];
+  if (url.includes('youtu.be')) {
+    channel_id = url.split('.be/')[1].split('?')[0];
   }
   // case 2: https://www.youtube.com/watch?v=zWvUFsWMmhY
   else {
-    channel_id = youtube_link.split('v=')[1];
+    channel_id = url.split('v=')[1];
   }
   const thumbnails = `https://img.youtube.com/vi/${channel_id}/sddefault.jpg`;
 
