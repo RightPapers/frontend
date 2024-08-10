@@ -27,7 +27,9 @@ const HistoryPanel = (history: YoutubeInfo) => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger className='w-full'>
-              <p className='line-clamp-2 text-sm font-bold text-left'>{video_title}</p>
+              <p className='line-clamp-2 text-left text-sm font-bold'>
+                {video_title}
+              </p>
             </TooltipTrigger>
             <TooltipContent>
               <p className='text-xs font-medium'>{video_title}</p>
