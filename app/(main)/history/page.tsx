@@ -20,7 +20,10 @@ const History = () => {
   return (
     <CardComponent>
       <p className='font-bold text-primary'>전체 검색 기록</p>
-      <div className='scrollbar-hide h-96 overflow-scroll'>
+      {histories.length === 0 && (
+        <p className='text-center text-gray-500 text-sm'>검색 기록이 없습니다.</p>
+      )}
+      <div className='scrollbar-hide max-h-96 overflow-scroll'>
         {histories.map((history, index) => (
           <div className='flex flex-col'>
             <HistoryPanel {...history} />
