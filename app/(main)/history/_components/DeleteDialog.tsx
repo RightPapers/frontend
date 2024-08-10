@@ -15,9 +15,11 @@ import { YoutubeInfo } from '@/lib/types';
 const DeleteDialog = ({
   setOpen,
   setHistories,
+  setIsAnimating,
 }: {
   setOpen: (value: boolean) => void;
   setHistories: (value: YoutubeInfo[]) => void;
+  setIsAnimating: (value: boolean) => void;
 }) => {
   const { deleteAllResults } = useResultStore();
   return (
@@ -48,6 +50,7 @@ const DeleteDialog = ({
               deleteAllResults();
               setHistories([]);
               setOpen(false);
+              setIsAnimating(true);
             }}
             className='bg-red-600 text-white hover:bg-red-600/80'
           >

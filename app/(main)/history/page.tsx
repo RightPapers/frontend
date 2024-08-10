@@ -49,6 +49,7 @@ const History = () => {
             <DeleteDialog
               setOpen={setPopoverOpen}
               setHistories={setHistories}
+              setIsAnimating={setIsAnimating}
             />
           </PopoverContent>
         </Popover>
