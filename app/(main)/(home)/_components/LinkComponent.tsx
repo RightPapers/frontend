@@ -20,7 +20,7 @@ const formSchema = z.object({
 // TODO: 추후 Flask 서버로부터의 페칭으로 수정
 const fetchData = async (
   url: string,
-  addResult: (videoId: string, result: Result) => void
+  addResult: (video_id: string, result: Result) => void
 ) => {
   const res = await fetch('api/analyze', {
     method: 'POST',

@@ -14,7 +14,7 @@ const HistoryCards = () => {
 
   useEffect(() => {
     results.slice(0, 2).map((result) => {
-      setHistories((prev) => [...prev, result.result.youtube_info]);
+      setHistories((prev) => [...prev, result.data.youtube_info]);
     });
   }, [results]);
 

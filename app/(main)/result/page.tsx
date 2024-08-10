@@ -23,7 +23,7 @@ const Result = ({
       ? results.find((result) => result.id === id)
       : results[results.length - 1] || null;
 
-    setResult(foundResult?.result);
+    setResult(foundResult?.data);
   }, [searchParams]);
 
   // TODO: 잘못된 ID로 접근하는 경우의 UI 추가
