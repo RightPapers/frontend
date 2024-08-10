@@ -21,14 +21,15 @@ const History = () => {
   const { deleteResult } = useResultStore();
   const [histories, setHistories] = useState<YoutubeInfo[]>([]);
   const [popoverOpen, setPopoverOpen] = useState<boolean>(false);
+  const [isAnimating, setIsAnimating] = useState<boolean>(false);
 
   useEffect(() => {
-    results.map((result) => {
-      setHistories((prev) => [...prev, result.data.youtube_info]);
-    });
+    const histories = results.map((result) => result.data.youtube_info);
+    setHistories(histories);
   }, [results]);
 
   const handleDelete = (videoId: string) => {
+    setIsAnimating(true);
     deleteResult(videoId);
     setHistories((prev) => prev.filter((item) => item.video_id !== videoId));
   };
@@ -53,18 +54,20 @@ const History = () => {
         </Popover>
       </div>
 
-      {histories.length === 0 && (
+      {!isAnimating && histories.length === 0 && (
         <p className='text-center text-sm text-gray-500'>
           검색 기록이 없습니다.
         </p>
       )}
       <div className='max-h-96 overflow-scroll scrollbar-hide'>
-        <AnimatePresence>
+        <AnimatePresence
+          onExitComplete={() => {
+            setIsAnimating(false);
+          }}
+        >
           {histories.map((history, index) => (
             <motion.div
               key={history.video_id}
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -50 }}
               transition={{ duration: 0.3 }}
               className='flex flex-col'
