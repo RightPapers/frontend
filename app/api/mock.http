@@ -24,7 +24,7 @@ POST {{baseUrl}}/analyze HTTP/1.1
 Content-Type: application/json; charset=UTF-8
 
 {
-    "youtube_link": "https://www.youtube.com/watch?v=pFjhHPa_Apw"
+    "url": "https://www.youtube.com/watch?v=pFjhHPa_Apw"
 }
 
 ### 유튜브 공유하기 URL
@@ -33,5 +33,5 @@ POST {{baseUrl}}/analyze HTTP/1.1
 Content-Type: application/json; charset=UTF-8
 
 {
-    "youtube_link": "https://youtu.be/DRjRI-Z4028?si=CTFis-VFXKMA4u9k"
+    "url": "https://youtu.be/DRjRI-Z4028?si=CTFis-VFXKMA4u9k"
 }
