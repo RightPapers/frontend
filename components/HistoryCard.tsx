@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import {
+  Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Tooltip } from '@radix-ui/react-tooltip';
 import { YoutubeInfo } from '@/lib/types';
 import Link from 'next/link';
 
@@ -29,19 +29,12 @@ const HistoryCard = (history: YoutubeInfo) => {
                 </p>
               </TooltipTrigger>
               <TooltipContent>
-                <p className='text-[9px] font-bold'>{video_title}</p>
+                <p className='text-xs font-medium'>{video_title}</p>
               </TooltipContent>
             </Tooltip>
-            <Tooltip>
-              <TooltipTrigger>
-                <p className='line-clamp-1 text-left text-[11px] text-gray-500'>
-                  {channel_title}
-                </p>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p className='text-[9px] font-bold'>{channel_title}</p>
-              </TooltipContent>
-            </Tooltip>
+            <p className='line-clamp-1 text-left text-[11px] text-gray-500'>
+              {channel_title}
+            </p>
           </TooltipProvider>
         </div>
       </div>

@@ -1,6 +1,12 @@
 import { YoutubeInfo } from '@/lib/types';
 import Image from 'next/image';
 import Link from 'next/link';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 
 const HistoryPanel = (history: YoutubeInfo) => {
   const { video_id, thumbnails, video_title, channel_title } = history;
@@ -18,7 +24,16 @@ const HistoryPanel = (history: YoutubeInfo) => {
         className='h-16 w-28 rounded-lg object-cover'
       />
       <div className='max-w-40 mobile:max-w-32'>
-        <p className='line-clamp-2 text-sm font-bold'>{video_title}</p>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger className='w-full'>
+              <p className='line-clamp-2 text-sm font-bold text-left'>{video_title}</p>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className='text-xs font-medium'>{video_title}</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
         <p className='line-clamp-1 text-xs'>{channel_title}</p>
       </div>
     </Link>

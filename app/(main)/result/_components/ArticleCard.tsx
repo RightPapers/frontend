@@ -30,7 +30,7 @@ const ArticleCard = ({
               <p className='line-clamp-2 text-sm'>{title}</p>
             </TooltipTrigger>
             <TooltipContent>
-              <p className='text-[13px] font-medium'>{title}</p>
+              <p className='text-xs font-medium'>{title}</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
