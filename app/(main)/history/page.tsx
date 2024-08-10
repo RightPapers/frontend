@@ -18,14 +18,16 @@ const History = () => {
   }, [results]);
 
   return (
-    <CardComponent className='gap-4'>
+    <CardComponent>
       <p className='font-bold text-primary'>전체 검색 기록</p>
-      {histories.map((history, index) => (
-        <div className='flex flex-col'>
-          <HistoryPanel {...history} />
-          {index < histories.length - 1 && <Separator className='mt-4' />}
-        </div>
-      ))}
+      <div className='scrollbar-hide h-96 overflow-scroll'>
+        {histories.map((history, index) => (
+          <div className='flex flex-col'>
+            <HistoryPanel {...history} />
+            {index < histories.length - 1 && <Separator className='my-3' />}
+          </div>
+        ))}
+      </div>
     </CardComponent>
   );
 };
