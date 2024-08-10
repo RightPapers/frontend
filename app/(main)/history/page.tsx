@@ -22,7 +22,7 @@ const History = () => {
       <p className='font-bold text-primary'>전체 검색 기록</p>
       {histories.map((history, index) => (
         <div className='flex flex-col'>
-          <HistoryPanel history={history} />
+          <HistoryPanel {...history} />
           {index < histories.length - 1 && <Separator className='mt-4' />}
         </div>
       ))}

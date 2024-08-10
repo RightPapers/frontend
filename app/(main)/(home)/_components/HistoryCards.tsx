@@ -33,12 +33,7 @@ const HistoryCards = () => {
           </div>
           <div className='flex h-max min-h-24 w-96 cursor-pointer items-center justify-around rounded-3xl bg-white p-4 shadow-md mobile:w-full mobile:gap-2'>
             {histories.slice(0, 2).map((history) => (
-              <Link
-                key={history.video_id}
-                href={`/result?id=${history.video_id}`}
-              >
-                <HistoryCard {...history} />
-              </Link>
+              <HistoryCard {...history} />
             ))}
           </div>
         </div>
