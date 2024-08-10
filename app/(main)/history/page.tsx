@@ -14,8 +14,7 @@ import {
 } from '@/components/ui/popover';
 import { IoCloseOutline } from 'react-icons/io5';
 import DeleteDialog from './_components/DeleteDialog';
-
-
+import { motion, AnimatePresence } from 'framer-motion';
 
 const History = () => {
   const results = useResultStore((state) => state.results);
@@ -59,23 +58,29 @@ const History = () => {
           검색 기록이 없습니다.
         </p>
       )}
-      <div className='scrollbar-hide max-h-96 overflow-scroll'>
-        {histories.map((history, index) => (
-          <div className='flex flex-col' key={index}>
-            <div className='relative'>
-              <HistoryPanel {...history} />
-              {/* TODO: 삭제 시 트랜지션 추가 */}
-              <IoCloseOutline
-                className='absolute -right-1 top-0 z-10 cursor-pointer text-gray-400'
-                size={20}
-                onClick={() => {
-                  handleDelete(history.video_id);
-                }}
-              />
-            </div>
-            {index < histories.length - 1 && <Separator className='my-3' />}
-          </div>
-        ))}
+      <div className='max-h-96 overflow-scroll scrollbar-hide'>
+        <AnimatePresence>
+          {histories.map((history, index) => (
+            <motion.div
+              key={history.video_id}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -50 }}
+              transition={{ duration: 0.3 }}
+              className='flex flex-col'
+            >
+              <div className='relative'>
+                <HistoryPanel {...history} />
+                <IoCloseOutline
+                  className='absolute -right-1 top-0 z-10 cursor-pointer text-gray-400'
+                  size={20}
+                  onClick={() => handleDelete(history.video_id)}
+                />
+              </div>
+              {index < histories.length - 1 && <Separator className='my-3' />}
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
     </CardComponent>
   );
