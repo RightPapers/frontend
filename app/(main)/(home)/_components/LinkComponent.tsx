@@ -28,8 +28,10 @@ const fetchData = async (
   });
   const result: Result = await res.json();
   addResult(result.youtube_info.video_id, result);
-  // 데이터 페칭이 12초 걸린다고 가정
-  await new Promise((resolve) => setTimeout(resolve, 12000));
+  // 데이터 페칭이 6초 ~ 15초 사이 랜덤하게 걸린다고 가정
+  await new Promise((resolve) =>
+    setTimeout(resolve, Math.random() * 9000 + 6000)
+  );
 };
 
 const LinkComponent = ({
