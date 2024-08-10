@@ -23,6 +23,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
+import { IoCloseOutline } from 'react-icons/io5';
 
 const DeleteAlertDialog = ({
   setOpen,
@@ -73,7 +74,7 @@ const DeleteAlertDialog = ({
 
 const History = () => {
   const results = useResultStore((state) => state.results);
-
+  const { deleteResult } = useResultStore();
   const [histories, setHistories] = useState<YoutubeInfo[]>([]);
   const [popoverOpen, setPopoverOpen] = useState<boolean>(false);
 
@@ -111,7 +112,20 @@ const History = () => {
       <div className='scrollbar-hide max-h-96 overflow-scroll'>
         {histories.map((history, index) => (
           <div className='flex flex-col' key={index}>
-            <HistoryPanel {...history} />
+            <div className='relative'>
+              <HistoryPanel {...history} />
+              {/* TODO: 삭제 시 트랜지션 추가 */}
+              <IoCloseOutline
+                className='absolute -right-1 top-0 z-10 cursor-pointer text-gray-400'
+                size={20}
+                onClick={() => {
+                  deleteResult(history.video_id);
+                  setHistories((prev) =>
+                    prev.filter((item) => item.video_id !== history.video_id)
+                  );
+                }}
+              />
+            </div>
             {index < histories.length - 1 && <Separator className='my-3' />}
           </div>
         ))}
