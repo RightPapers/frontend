@@ -32,8 +32,8 @@ const HistoryCards = () => {
             </Button>
           </div>
           <div className='flex h-max min-h-24 w-96 cursor-pointer items-center justify-around rounded-3xl bg-white p-4 shadow-md mobile:w-full mobile:gap-2'>
-            {histories.slice(0, 2).map((history) => (
-              <HistoryCard {...history} />
+            {histories.slice(0, 2).map((history, index) => (
+              <HistoryCard {...history} key={index}/>
             ))}
           </div>
         </div>

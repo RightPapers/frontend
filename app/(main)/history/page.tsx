@@ -56,7 +56,7 @@ const History = () => {
       )}
       <div className='scrollbar-hide max-h-96 overflow-scroll'>
         {histories.map((history, index) => (
-          <div className='flex flex-col'>
+          <div className='flex flex-col'key={index}>
             <HistoryPanel {...history} />
             {index < histories.length - 1 && <Separator className='my-3' />}
           </div>
