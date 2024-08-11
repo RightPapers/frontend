@@ -1,11 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import LinkComponent from './_components/input/LinkComponent';
+
 import LoadingProgress from './_components/LoadingProgress';
 import { LoadingState } from '@/lib/types';
 import HistoryCards from './_components/history/HistoryCards';
 import MainHeader from './_components/MainHeader';
+import LinkCard from './_components/input/LinkCard';
 
 const Home = () => {
   const [loadingState, setLoadingState] = useState<LoadingState>(
@@ -13,17 +14,17 @@ const Home = () => {
   );
 
   return (
-    <>
+    <div className='flex flex-col gap-8'>
       <MainHeader />
       {loadingState === LoadingState.before ? (
         <>
-          <LinkComponent setLoadingState={setLoadingState} />
+          <LinkCard setLoadingState={setLoadingState} />
           <HistoryCards />
         </>
       ) : (
         <LoadingProgress loadingState={loadingState} />
       )}
-    </>
+    </div>
   );
 };
 

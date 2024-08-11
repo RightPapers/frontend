@@ -1,8 +1,8 @@
 import { Button } from '@/components/ui/button';
-import CardComponent from '@/components/CardComponent';
 import LinkHeader from './LinkHeader';
 import { LoadingState } from '@/lib/types';
 import MainInput from './MainInput';
+import { Card } from '@/components/ui/card';
 
 // TODO: POST 요청하는 함수로 수정
 const fetchData = async () => {
@@ -10,13 +10,13 @@ const fetchData = async () => {
   await new Promise((resolve) => setTimeout(resolve, 15000));
 };
 
-const LinkComponent = ({
+const LinkCard = ({
   setLoadingState,
 }: {
   setLoadingState: (state: LoadingState) => void;
 }) => {
   return (
-    <CardComponent>
+    <Card className='flex h-fit w-full flex-col gap-8 rounded-[20px] p-8 shadow-lg'>
       <LinkHeader />
       <form className='flex flex-col gap-8'>
         <MainInput />
@@ -32,8 +32,8 @@ const LinkComponent = ({
           검색
         </Button>
       </form>
-    </CardComponent>
+    </Card>
   );
 };
 
-export default LinkComponent;
+export default LinkCard;
