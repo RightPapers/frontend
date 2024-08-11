@@ -70,7 +70,7 @@ export default function LoadingProgress({
       <p className='text-lg'>오직 올바른 정보만</p>
       <Progress
         value={progress}
-        className='max-w-mobile my-6 bg-white shadow-lg'
+        className='my-6 max-w-mobile bg-white shadow-lg'
       />
       <p>잠시만 기다려주세요</p>
       <p>AI 영상 분석 진행률: {progress}%</p>
