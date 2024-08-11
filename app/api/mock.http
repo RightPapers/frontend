@@ -1,0 +1,37 @@
+# REST Client 확장을 반드시 설치 후 사용해주세요!
+
+@baseUrl = https://right-paper.vercel.app/api
+
+GET {{baseUrl}}/feedback HTTP/1.1
+
+### 
+
+GET {{baseUrl}}/analyze HTTP/1.1
+
+###
+
+POST {{baseUrl}}/feedback HTTP/1.1
+Content-Type: application/json; charset=UTF-8
+
+{
+    "was_helpful": false,
+    "feedback": "This is a test feedback"
+}
+
+### 유튜브 기본 URL
+
+POST {{baseUrl}}/analyze HTTP/1.1
+Content-Type: application/json; charset=UTF-8
+
+{
+    "url": "https://www.youtube.com/watch?v=pFjhHPa_Apw"
+}
+
+### 유튜브 공유하기 URL
+
+POST {{baseUrl}}/analyze HTTP/1.1
+Content-Type: application/json; charset=UTF-8
+
+{
+    "url": "https://youtu.be/DRjRI-Z4028?si=CTFis-VFXKMA4u9k"
+}

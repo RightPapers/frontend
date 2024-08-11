@@ -21,7 +21,7 @@ const config = {
       },
     },
     extend: {
-      backgroundImage:{
+      backgroundImage: {
         'world-map': "url('/assets/world-map.svg')",
       },
       colors: {

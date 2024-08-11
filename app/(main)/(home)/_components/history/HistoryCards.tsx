@@ -1,39 +1,42 @@
+'use client';
+
 import HistoryCard from '@/components/HistoryCard';
-import { Button } from '@/components/ui/button';
+import { useResultStore } from '@/lib/store';
+import { YoutubeInfo } from '@/lib/types';
 import Link from 'next/link';
-import { LiaAngleRightSolid } from 'react-icons/lia';
+import { useEffect, useState } from 'react';
 import NavigatorHeader from '../NavigatorHeader';
 
-// TODO: 로컬스토리지에서 데이터를 받아오도록 수정
-const dummyHistory = [
-  {
-    video_title: '긴급속보 일본 화산 대폭발!당장 일본을 도망쳐야 한다!',
-    channel_title: '페페TV',
-    thumbnails: 'https://img.youtube.com/vi/FRqTqguKe6c/sddefault.jpg',
-  },
-  {
-    video_title: '안냥하세요!!!',
-    channel_title: '스토리 온',
-    thumbnails: 'https://img.youtube.com/vi/u069h5Dm_JI/sddefault.jpg',
-  },
-];
-
-// TODO: 로컬스토리지가 비어 있을 때의 UI 추가
 const HistoryCards = () => {
+  const results = useResultStore((state) => state.results);
+  const [histories, setHistories] = useState<YoutubeInfo[]>([]);
+
+  useEffect(() => {
+    results.slice(0, 2).map((result) => {
+      setHistories((prev) => [...prev, result.data.youtube_info]);
+    });
+  }, [results]);
+
   return (
-    <div className='flex flex-col'>
-      <NavigatorHeader location='/history' linkText='전체 보기'>
-        <p className='pl-4 font-extrabold text-primary'>검색 기록</p>
-      </NavigatorHeader>
-      <div className='flex h-max w-96 cursor-pointer justify-around rounded-3xl bg-white p-4 shadow-md mobile:w-full mobile:gap-2'>
-        {dummyHistory.slice(0, 2).map((history, index) => (
-          // TODO: video_title을 id로 교체
-          <Link key={index} href={`/result?title=${history.video_title}`}>
-            <HistoryCard {...history} />
-          </Link>
-        ))}
-      </div>
-    </div>
+    <>
+      {histories.length !== 0 && (
+        <div className='flex flex-col'>
+          <NavigatorHeader location='/history' linkText='전체 보기'>
+            <p className='pl-4 font-extrabold text-primary'>검색 기록</p>
+          </NavigatorHeader>
+          <div className='flex h-max min-h-24 w-96 cursor-pointer items-center justify-around rounded-3xl bg-white p-4 shadow-md mobile:w-full mobile:gap-2'>
+            {histories.slice(0, 2).map((history) => (
+              <Link
+                key={history.video_id}
+                href={`/result?id=${history.video_id}`}
+              >
+                <HistoryCard {...history} />
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

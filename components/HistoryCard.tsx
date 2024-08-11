@@ -5,16 +5,10 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { Tooltip } from '@radix-ui/react-tooltip';
+import { YoutubeInfo } from '@/lib/types';
 
-const HistoryCard = ({
-  video_title,
-  channel_title,
-  thumbnails,
-}: {
-  video_title: string;
-  channel_title: string;
-  thumbnails: string;
-}) => {
+const HistoryCard = (history: YoutubeInfo) => {
+  const { thumbnails, video_title, channel_title } = history;
   return (
     <div className='flex w-36 flex-col gap-4 mobile:w-32'>
       <Image
