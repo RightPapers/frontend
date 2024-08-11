@@ -1,13 +1,16 @@
 import { Button } from '@/components/ui/button';
 import CardComponent from '@/components/CardComponent';
-import LinkHeader from './LinkHeader';
 import { LoadingState, Result } from '@/lib/types';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { Form, FormControl, FormField } from '@/components/ui/form';
-import InputComponent from './InputComponent';
+
 import { useResultStore } from '@/lib/store';
+
+import { FaYoutube } from 'react-icons/fa';
+import NavigatorHeader from '../NavigatorHeader';
+import MainInput from './MainInput';
 
 const youtubeUrlPattern = /^(https?:\/\/)?(www\.)?(youtu\.be|youtube\.com)/;
 
@@ -54,7 +57,12 @@ const LinkComponent = ({
 
   return (
     <CardComponent>
-      <LinkHeader />
+      <NavigatorHeader location='/' linkText='링크 구하는 법'>
+        <div className='inline-flex items-center gap-1 font-semibold'>
+          <FaYoutube fill='#FF0000' />
+          링크를 입력해주세요
+        </div>
+      </NavigatorHeader>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -66,7 +74,7 @@ const LinkComponent = ({
             render={({ field }) => (
               <FormControl>
                 <div className='flex flex-col gap-1'>
-                  <InputComponent field={field} />
+                  <MainInput field={field} />
                   {form.formState.errors.url && (
                     <p className='text-sm text-red-500'>
                       {form.formState.errors.url.message}

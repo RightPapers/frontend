@@ -2,7 +2,7 @@ import { Input } from '@/components/ui/input';
 import { ControllerRenderProps } from 'react-hook-form';
 import { IoSearch } from 'react-icons/io5';
 
-const InputComponent = ({
+const MainInput = ({
   field,
 }: {
   field: ControllerRenderProps<{ url: string }, 'url'>;
@@ -18,4 +18,4 @@ const InputComponent = ({
   );
 };
 
-export default InputComponent;
+export default MainInput;

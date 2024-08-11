@@ -62,23 +62,21 @@ export default function LoadingProgress({
   }, [loadingState]);
 
   return (
-    <div className='flex min-h-[720px] items-center justify-center bg-world-map bg-top bg-no-repeat'>
-      <div className='relative flex flex-col items-center text-center font-bold text-primary'>
-        <span className='z-10'>
-          <Logo />
-        </span>
-        <p className='text-[42px] leading-tight'>Right Paper</p>
-        <p className='text-lg'>오직 올바른 정보만</p>
-        <Progress
-          value={progress}
-          className='my-6 max-w-mobile bg-white shadow-lg'
-        />
-        <p>잠시만 기다려주세요</p>
-        <p>AI 영상 분석 진행률: {progress}%</p>
-        <div className='mt-16 text-[17px] font-extrabold text-blue-900'>
-          <p>이 AI 모델의 결과는 참고용입니다</p>
-          <p>검증되지 않은 정보는 신중하게 확인하세요</p>
-        </div>
+    <div className='relative flex flex-col items-center text-center font-bold text-primary'>
+      <span className='z-10'>
+        <Logo />
+      </span>
+      <p className='text-[42px] leading-tight'>Right Paper</p>
+      <p className='text-lg'>오직 올바른 정보만</p>
+      <Progress
+        value={progress}
+        className='my-6 max-w-mobile bg-white shadow-lg'
+      />
+      <p>잠시만 기다려주세요</p>
+      <p>AI 영상 분석 진행률: {progress}%</p>
+      <div className='mt-16 text-[17px] font-extrabold text-blue-900'>
+        <p>이 AI 모델의 결과는 참고용입니다</p>
+        <p>검증되지 않은 정보는 신중하게 확인하세요</p>
       </div>
     </div>
   );
