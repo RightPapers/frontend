@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         background
       }
     >
-      <div className='max-w-mobile z-[1] w-full mobile:max-w-full'>
+      <div className='max-w-mobile gap z-[1] w-full mobile:max-w-full'>
         {children}
       </div>
     </main>

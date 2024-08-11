@@ -1,7 +1,7 @@
 import { Input } from '@/components/ui/input';
 import { IoSearch } from 'react-icons/io5';
 
-const InputComponent = () => {
+const MainInput = () => {
   return (
     <div className='relative'>
       <Input className='rounded-[34px] border border-primary pl-10 focus-visible:ring-primary' />
@@ -10,4 +10,4 @@ const InputComponent = () => {
   );
 };
 
-export default InputComponent;
+export default MainInput;

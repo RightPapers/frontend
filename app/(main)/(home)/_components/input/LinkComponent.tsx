@@ -1,8 +1,8 @@
 import { Button } from '@/components/ui/button';
-import InputComponent from './InputComponent';
 import CardComponent from '@/components/CardComponent';
 import LinkHeader from './LinkHeader';
 import { LoadingState } from '@/lib/types';
+import MainInput from './MainInput';
 
 // TODO: POST 요청하는 함수로 수정
 const fetchData = async () => {
@@ -19,7 +19,7 @@ const LinkComponent = ({
     <CardComponent>
       <LinkHeader />
       <form className='flex flex-col gap-8'>
-        <InputComponent />
+        <MainInput />
         <Button
           variant='main'
           onClick={async (e) => {
