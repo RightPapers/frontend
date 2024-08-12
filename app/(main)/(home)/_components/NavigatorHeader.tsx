@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { FaYoutube } from 'react-icons/fa';
 import { LiaAngleRightSolid } from 'react-icons/lia';
 
 const NavigatorHeader = ({
@@ -8,19 +7,24 @@ const NavigatorHeader = ({
   children,
   linkText,
 }: {
-  location: string;
+  location?: string;
   children: React.ReactNode;
-  linkText: string;
+  linkText?: string;
 }) => {
+  const showURLButton = linkText && location;
   return (
-    <section className='flex items-center justify-between text-primary'>
+    <section
+      className={`flex items-center ${showURLButton ? 'justify-between' : 'justify-start'} text-primary`}
+    >
       {children}
-      <Button variant='link' asChild>
-        <Link href={location} passHref>
-          {linkText}
-          <LiaAngleRightSolid />
-        </Link>
-      </Button>
+      {showURLButton && (
+        <Button variant='link' asChild>
+          <Link href={location} passHref>
+            {linkText}
+            <LiaAngleRightSolid />
+          </Link>
+        </Button>
+      )}
     </section>
   );
 };

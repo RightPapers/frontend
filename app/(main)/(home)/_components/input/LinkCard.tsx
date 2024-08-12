@@ -58,7 +58,7 @@ const LinkComponent = ({
   return (
     <CardComponent>
       <NavigatorHeader location='/' linkText='링크 구하는 법'>
-        <div className='inline-flex items-center gap-1 font-semibold'>
+        <div className='inline-flex items-center gap-1 font-extrabold'>
           <FaYoutube fill='#FF0000' />
           링크를 입력해주세요
         </div>
