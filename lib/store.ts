@@ -5,6 +5,8 @@ import { Result } from '@/lib/types';
 interface ResultState {
   results: { id: string; data: Result }[];
   addResult: (video_id: string, data: Result) => void;
+  deleteResult: (video_id: string) => void;
+  deleteAllResults: () => void;
 }
 
 export const useResultStore = create<ResultState>()(
@@ -24,6 +26,11 @@ export const useResultStore = create<ResultState>()(
             return { results: [...state.results, { id: video_id, data }] };
           }
         }),
+      deleteResult: (video_id: string) =>
+        set((state) => ({
+          results: state.results.filter((item) => item.id !== video_id),
+        })),
+      deleteAllResults: () => set({ results: [] }),
     }),
     {
       name: 'youtube-results-storage',

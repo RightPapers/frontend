@@ -12,9 +12,15 @@ const HistoryCards = () => {
   const [histories, setHistories] = useState<YoutubeInfo[]>([]);
 
   useEffect(() => {
-    results.slice(0, 2).map((result) => {
-      setHistories((prev) => [...prev, result.data.youtube_info]);
-    });
+    if (results.length >= 2) {
+      const lastTwoResults = results
+        .slice(-2)
+        .reverse()
+        .map((result) => result.data.youtube_info);
+      setHistories(lastTwoResults);
+    } else if (results.length === 1) {
+      setHistories([results[0].data.youtube_info]);
+    }
   }, [results]);
 
   return (
@@ -25,13 +31,8 @@ const HistoryCards = () => {
             <p className='pl-4 font-extrabold text-primary'>검색 기록</p>
           </NavigatorHeader>
           <div className='flex h-max min-h-24 w-96 cursor-pointer items-center justify-around rounded-3xl bg-white p-4 shadow-md mobile:w-full mobile:gap-2'>
-            {histories.slice(0, 2).map((history) => (
-              <Link
-                key={history.video_id}
-                href={`/result?id=${history.video_id}`}
-              >
-                <HistoryCard {...history} />
-              </Link>
+            {histories.map((history, index) => (
+              <HistoryCard {...history} key={index} />
             ))}
           </div>
         </div>
