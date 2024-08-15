@@ -101,4 +101,6 @@ const LinkComponent = forwardRef(
   }
 );
 
+LinkComponent.displayName = 'LinkComponent';
+
 export default LinkComponent;

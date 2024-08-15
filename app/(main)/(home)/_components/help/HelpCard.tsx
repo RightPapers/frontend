@@ -42,4 +42,6 @@ const HelpCard = forwardRef(
   }
 );
 
+HelpCard.displayName = 'HelpCard';
+
 export default HelpCard;

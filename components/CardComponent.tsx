@@ -27,4 +27,6 @@ const CardComponent = forwardRef(
   }
 );
 
+CardComponent.displayName = 'CardComponent';
+
 export default CardComponent;
