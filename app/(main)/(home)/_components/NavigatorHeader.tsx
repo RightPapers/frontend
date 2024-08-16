@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import Link from 'next/link';
 import { LiaAngleRightSolid } from 'react-icons/lia';
 
@@ -15,7 +16,10 @@ const NavigatorHeader = ({
 }) => {
   return (
     <section
-      className={`flex items-center ${location || handleClick ? 'justify-between' : 'justify-start'} text-primary`}
+      className={cn(
+        'flex items-center justify-start gap-1 text-primary',
+        (location || handleClick) && 'justify-between'
+      )}
     >
       {children}
       {location && (

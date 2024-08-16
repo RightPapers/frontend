@@ -13,7 +13,7 @@ const Home = () => {
   const [loadingState, setLoadingState] = useState<LoadingState>(
     LoadingState.before
   );
-  const isLoading = loadingState === LoadingState.start;
+  const isLoading = loadingState !== LoadingState.before;
 
   const [showHelpModal, setShowHelpModal] = useState<boolean>(false);
   const previousShowHelpModal = useRef(showHelpModal);
