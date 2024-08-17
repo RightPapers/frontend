@@ -11,6 +11,7 @@ import { useResultStore } from '@/lib/store';
 import { FaYoutube } from 'react-icons/fa';
 import NavigatorHeader from '../NavigatorHeader';
 import MainInput from './MainInput';
+import { forwardRef } from 'react';
 
 const youtubeUrlPattern = /^(https?:\/\/)?(www\.)?(youtu\.be|youtube\.com)/;
 
@@ -37,60 +38,69 @@ const fetchData = async (
   );
 };
 
-const LinkComponent = ({
-  setLoadingState,
-}: {
-  setLoadingState: (state: LoadingState) => void;
-}) => {
-  const { addResult } = useResultStore();
+const LinkComponent = forwardRef(
+  (
+    {
+      setLoadingState,
+      handleShowHelp,
+    }: {
+      setLoadingState: (loadingState: LoadingState) => void;
+      handleShowHelp: () => void;
+    },
+    ref: React.Ref<HTMLDivElement>
+  ) => {
+    const { addResult } = useResultStore();
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: { url: '' },
-  });
+    const form = useForm<z.infer<typeof formSchema>>({
+      resolver: zodResolver(formSchema),
+      defaultValues: { url: '' },
+    });
 
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    setLoadingState(LoadingState.start);
-    await fetchData(data.url, addResult);
-    setLoadingState(LoadingState.done);
-  };
+    const onSubmit = async (data: z.infer<typeof formSchema>) => {
+      setLoadingState(LoadingState.start);
+      await fetchData(data.url, addResult);
+      setLoadingState(LoadingState.done);
+    };
 
-  return (
-    <CardComponent>
-      <NavigatorHeader location='/' linkText='링크 구하는 법'>
-        <div className='inline-flex items-center gap-1 font-semibold'>
-          <FaYoutube fill='#FF0000' />
-          링크를 입력해주세요
-        </div>
-      </NavigatorHeader>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className='flex flex-col gap-8'
-        >
-          <FormField
-            control={form.control}
-            name='url'
-            render={({ field }) => (
-              <FormControl>
-                <div className='flex flex-col gap-1'>
-                  <MainInput field={field} />
-                  {form.formState.errors.url && (
-                    <p className='text-sm text-red-500'>
-                      {form.formState.errors.url.message}
-                    </p>
-                  )}
-                </div>
-              </FormControl>
-            )}
-          />
-          <Button variant='main' type='submit'>
-            검색
-          </Button>
-        </form>
-      </Form>
-    </CardComponent>
-  );
-};
+    return (
+      <CardComponent ref={ref}>
+        <NavigatorHeader linkText='링크 구하는 법' handleClick={handleShowHelp}>
+          <div className='inline-flex items-center gap-1 font-extrabold'>
+            <FaYoutube fill='#FF0000' />
+            링크를 입력해주세요
+          </div>
+        </NavigatorHeader>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className='flex flex-col gap-8'
+          >
+            <FormField
+              control={form.control}
+              name='url'
+              render={({ field }) => (
+                <FormControl>
+                  <div className='flex flex-col gap-1'>
+                    <MainInput field={field} />
+                    {form.formState.errors.url && (
+                      <p className='text-sm text-red-500'>
+                        {form.formState.errors.url.message}
+                      </p>
+                    )}
+                  </div>
+                </FormControl>
+              )}
+            />
+            <Button variant='main' type='submit'>
+              검색
+            </Button>
+          </form>
+        </Form>
+      </CardComponent>
+    );
+  }
+);
+
+LinkComponent.displayName = 'LinkComponent';
 
 export default LinkComponent;
