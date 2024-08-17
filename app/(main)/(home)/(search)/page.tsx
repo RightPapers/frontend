@@ -36,7 +36,7 @@ const Home = () => {
   }, [showHelpModal, animate, scope]);
 
   return (
-    <>
+    <div className='z-10'>
       {isLoading ? (
         <LoadingProgress loadingState={loadingState} />
       ) : (
@@ -54,7 +54,7 @@ const Home = () => {
           {!showHelpModal && <HistoryCards />}
         </>
       )}
-    </>
+    </div>
   );
 };
 
