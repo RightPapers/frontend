@@ -39,7 +39,7 @@ const Result = ({
       <AccuracyDashboard accuracy={accuracy} />
       <SummaryCard accuracy={accuracy} summary={analysis_result.summary} />
       <ArticleCards accuracy={accuracy} articles={related_articles} />
-      <FeedbackCard />
+      <FeedbackCard accuracy={accuracy}/>
     </>
   );
 };
