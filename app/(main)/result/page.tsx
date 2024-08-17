@@ -7,6 +7,8 @@ import ArticleCards from './_components/ArticleCards';
 import { useResultStore } from '@/lib/store';
 import { useEffect, useState } from 'react';
 import type { Result } from '@/lib/types';
+import Image from 'next/image';
+import AccuracyThumbnail from './_components/AccuracyThumbnail';
 
 const Result = ({
   searchParams,
@@ -31,15 +33,16 @@ const Result = ({
     return null;
   }
 
-  const { analysis_result, related_articles } = result;
+  const { analysis_result, related_articles, youtube_info } = result;
   const accuracy = 100 - analysis_result.fake_possibility;
 
   return (
     <>
-      <AccuracyDashboard accuracy={accuracy} />
+
+      <AccuracyThumbnail accuracy={accuracy} youtube_info={youtube_info} />
       <SummaryCard accuracy={accuracy} summary={analysis_result.summary} />
       <ArticleCards accuracy={accuracy} articles={related_articles} />
-      <FeedbackCard accuracy={accuracy}/>
+      <FeedbackCard accuracy={accuracy} />
     </>
   );
 };

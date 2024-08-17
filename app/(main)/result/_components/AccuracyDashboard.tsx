@@ -54,7 +54,7 @@ const AccuracyDashboard = ({ accuracy }: AccuracyDashboardProps) => {
 
   return (
     <div className='flex flex-col items-center'>
-      <div className='relative flex h-44 w-48 items-center justify-center rounded-3xl bg-gray-300/70 pb-2'>
+      <div className='relative flex h-44 w-48 items-center justify-center rounded-3xl bg-gray-300/80 pb-2'>
         <Dashboard />
         <span
           className='absolute inset-y-[45px] h-12 w-[3px] origin-bottom bg-red-500'
