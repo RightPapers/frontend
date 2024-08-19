@@ -26,7 +26,7 @@ export const useResultStore = create<ResultState>()(
             return { results: [...state.results, { id: video_id, data }] };
           }
         }),
-      deleteResult: (video_id: string) =>
+      deleteResult: (video_id: string | undefined) =>
         set((state) => ({
           results: state.results.filter((item) => item.id !== video_id),
         })),

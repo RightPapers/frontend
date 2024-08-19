@@ -5,10 +5,10 @@ export enum LoadingState {
 }
 
 export interface RelatedArticle {
-  source: string;
-  upload_time: string;
-  title: string;
+  description: string;
   link: string;
+  pubDate: string;
+  title: string;
 }
 
 export interface YoutubeInfo {
@@ -19,7 +19,7 @@ export interface YoutubeInfo {
 }
 
 export interface AnalysisResult {
-  fake_possibility: number;
+  fake_probability: number;
   summary: string;
 }
 

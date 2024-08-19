@@ -1,5 +1,6 @@
 'use client';
 
+import { useAccuracyStore } from '@/lib/AccuracyStore';
 import { useEffect, useState } from 'react';
 
 interface Gradient {
@@ -7,17 +8,13 @@ interface Gradient {
   right: string;
 }
 
-const TitleComponent = ({
-  children,
-  accuracy,
-}: {
-  children: React.ReactNode;
-  accuracy: number;
-}) => {
+const TitleComponent = ({ children }: { children: React.ReactNode }) => {
   const [gradient, setGradient] = useState<Gradient>({
     left: '',
     right: '',
   });
+
+  const accuracy = useAccuracyStore((state) => state.accuracy);
 
   useEffect(() => {
     if (accuracy < 30) {

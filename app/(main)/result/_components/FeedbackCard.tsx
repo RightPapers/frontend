@@ -10,13 +10,14 @@ import { useState } from 'react';
 import TitleComponent from '@/components/TitleComponent';
 import { RiQuestionnaireLine } from 'react-icons/ri';
 
-const FeedbackCard = ({ accuracy }: { accuracy: number }) => {
+const FeedbackCard = () => {
   const { toast } = useToast();
   const [open, setOpen] = useState<boolean>(false);
+
   return (
     <div className='flex flex-col'>
       <div className='mb-[-7px]'>
-        <TitleComponent accuracy={accuracy}>
+        <TitleComponent>
           <div className='flex items-center gap-2'>
             <RiQuestionnaireLine size={24} />
             도움이 되었나요?

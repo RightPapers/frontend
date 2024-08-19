@@ -15,13 +15,7 @@ const ExpandButtonText = ({ arrow, text }: { arrow: string; text: string }) => {
   );
 };
 
-const SummaryCard = ({
-  accuracy,
-  summary,
-}: {
-  accuracy: number;
-  summary: string;
-}) => {
+const SummaryCard = ({ summary }: { summary: string }) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
   const toggleExpand = () => {
@@ -31,7 +25,7 @@ const SummaryCard = ({
   return (
     <div className='flex flex-col'>
       <div className='mb-[-7px]'>
-        <TitleComponent accuracy={accuracy}>
+        <TitleComponent>
           <div className='flex gap-2'>
             <FiActivity size={22} />
             chatGPT 영상 요약

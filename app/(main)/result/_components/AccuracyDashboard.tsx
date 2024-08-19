@@ -1,56 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import Dashboard from '@/public/assets/dashboard.svg';
 import { cn } from '@/lib/utils';
+import useAccuracyTheme from '../_hooks/useAccuracyTheme';
+import { useAccuracyStore } from '@/lib/AccuracyStore';
 
-interface AccuracyDashboardProps {
-  accuracy: number;
-}
-
-interface DashboardColor {
-  accuracy: string;
-  resultText: string;
-  background: string;
-}
-
-const AccuracyDashboard = ({ accuracy }: AccuracyDashboardProps) => {
-  const initialDegree = -135;
-  const [rotateDegree, setRotateDegree] = useState<number>(initialDegree);
-  const [resultText, setResultText] = useState<string>('');
-  const [dashboardColor, setDashboardColor] = useState<DashboardColor>({
-    accuracy: '',
-    resultText: '',
-    background: '',
-  });
-
-  useEffect(() => {
-    if (accuracy < 30) {
-      setResultText('대체로 사실이 아닙니다');
-      setDashboardColor({
-        accuracy: 'text-destructive',
-        resultText: 'text-white',
-        background: 'bg-destructive',
-      });
-    } else if (accuracy <= 70) {
-      setResultText('사실 여부 판별이 어렵습니다');
-      setDashboardColor({
-        accuracy: 'text-black',
-        resultText: 'text-black',
-        background: 'bg-secondary',
-      });
-    } else {
-      setResultText('대체로 사실입니다');
-      setDashboardColor({
-        accuracy: 'text-primary',
-        resultText: 'text-white',
-        background: 'bg-primary',
-      });
-    }
-    // 0 ~ 100 -> -135 ~ 135 (accuracy -> rotateDegree)
-    const degree = (accuracy / 100) * initialDegree * -2 + initialDegree;
-    setRotateDegree(degree);
-  }, [accuracy]);
+const AccuracyDashboard = () => {
+  const accuracy = useAccuracyStore((state) => state.accuracy);
+  const { rotateDegree, resultText, dashboardColor } =
+    useAccuracyTheme(accuracy);
 
   return (
     <div className='flex flex-col items-center'>
