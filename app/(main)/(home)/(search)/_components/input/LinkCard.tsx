@@ -65,8 +65,8 @@ const LinkComponent = forwardRef(
     return (
       <CardComponent ref={ref}>
         <NavigatorHeader linkText='링크 구하는 법' handleClick={handleShowHelp}>
-          <div className='inline-flex items-center gap-1 font-extrabold'>
-            <FaYoutube fill='#FF0000' />
+          <div className='inline-flex items-center gap-2 text-sm font-extrabold'>
+            <FaYoutube fill='#FF0000' size={26} />
             링크를 입력해주세요
           </div>
         </NavigatorHeader>
