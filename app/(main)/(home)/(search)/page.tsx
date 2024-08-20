@@ -38,14 +38,14 @@ const Home = () => {
       {isLoading ? (
         <LoadingProgress />
       ) : (
-        <>
+        <div className='flex flex-col gap-6'>
           {showHelpModal ? (
             <HelpCard handleShowHelp={handleShowHelp} ref={scope} />
           ) : (
             <LinkCard handleShowHelp={handleShowHelp} ref={scope} />
           )}
           {!showHelpModal && <HistoryCards />}
-        </>
+        </div>
       )}
     </div>
   );
