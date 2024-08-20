@@ -23,7 +23,7 @@ const NavigatorHeader = ({
     >
       {children}
       {location && (
-        <Button variant='link' onClick={handleClick} asChild>
+        <Button variant='link' onClick={handleClick} className='px-0' asChild>
           <Link href={location} passHref className='flex items-center'>
             {linkText}
             <LiaAngleRightSolid />
@@ -31,7 +31,7 @@ const NavigatorHeader = ({
         </Button>
       )}
       {handleClick && (
-        <Button variant='link' onClick={handleClick}>
+        <Button variant='link' onClick={handleClick} className='px-0'>
           {linkText}
           <LiaAngleRightSolid />
         </Button>
