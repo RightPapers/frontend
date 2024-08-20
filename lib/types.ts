@@ -30,6 +30,7 @@ export interface Result {
 }
 
 export enum Gradient {
+  none = 'none',
   red = 'linear-gradient(240.22deg, #e73737 0%, #b23232 100%)',
   orange = 'linear-gradient(240.22deg, #FF9401 0%, #AD6400 100%)',
   blue = 'linear-gradient(240.22deg, #054AA8 0%, #002354 100%)',
