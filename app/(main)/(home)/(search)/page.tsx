@@ -2,17 +2,16 @@
 
 import { useEffect, useRef, useState } from 'react';
 import LoadingProgress from './_components/LoadingProgress';
-import { LoadingState } from '@/lib/types';
 import HistoryCards from './_components/history/HistoryCards';
 import LinkCard from './_components/input/LinkCard';
 import HelpCard from './_components/help/HelpCard';
 import { useAnimate } from 'framer-motion';
+import { useLoadingStore } from '@/lib/LoadingStore';
+import { Loading } from '@/lib/types';
 
 const Home = () => {
-  const [loadingState, setLoadingState] = useState<LoadingState>(
-    LoadingState.before
-  );
-  const isLoading = loadingState !== LoadingState.before;
+  const loading = useLoadingStore((state) => state.loading);
+  const isLoading = loading !== Loading.before;
 
   const [showHelpModal, setShowHelpModal] = useState<boolean>(false);
   const previousShowHelpModal = useRef(showHelpModal);
@@ -37,17 +36,13 @@ const Home = () => {
   return (
     <div className='z-10'>
       {isLoading ? (
-        <LoadingProgress loadingState={loadingState} />
+        <LoadingProgress />
       ) : (
         <>
           {showHelpModal ? (
             <HelpCard handleShowHelp={handleShowHelp} ref={scope} />
           ) : (
-            <LinkCard
-              setLoadingState={setLoadingState}
-              handleShowHelp={handleShowHelp}
-              ref={scope}
-            />
+            <LinkCard handleShowHelp={handleShowHelp} ref={scope} />
           )}
           {!showHelpModal && <HistoryCards />}
         </>

@@ -1,4 +1,4 @@
-export enum LoadingState {
+export enum Loading {
   before,
   start,
   done,

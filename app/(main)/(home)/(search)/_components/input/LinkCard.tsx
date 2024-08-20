@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import CardComponent from '@/components/CardComponent';
-import { LoadingState, Result } from '@/lib/types';
+import { Loading, Result } from '@/lib/types';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -12,6 +12,7 @@ import { FaYoutube } from 'react-icons/fa';
 import NavigatorHeader from '../NavigatorHeader';
 import MainInput from './MainInput';
 import { forwardRef } from 'react';
+import { useLoadingStore } from '@/lib/LoadingStore';
 
 const youtubeUrlPattern = /^(https?:\/\/)?(www\.)?(youtu\.be|youtube\.com)/;
 
@@ -41,15 +42,14 @@ const fetchData = async (
 const LinkComponent = forwardRef(
   (
     {
-      setLoadingState,
       handleShowHelp,
     }: {
-      setLoadingState: (loadingState: LoadingState) => void;
       handleShowHelp: () => void;
     },
     ref: React.Ref<HTMLDivElement>
   ) => {
     const { addResult } = useResultStore();
+    const setLoading = useLoadingStore((state) => state.setLoading);
 
     const form = useForm<z.infer<typeof formSchema>>({
       resolver: zodResolver(formSchema),
@@ -57,9 +57,9 @@ const LinkComponent = forwardRef(
     });
 
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
-      setLoadingState(LoadingState.start);
+      setLoading(Loading.start);
       await fetchData(data.url, addResult);
-      setLoadingState(LoadingState.done);
+      setLoading(Loading.done);
     };
 
     return (
