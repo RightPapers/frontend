@@ -3,11 +3,12 @@
 import FeedbackCard from './_components/FeedbackCard';
 import SummaryCard from './_components/SummaryCard';
 import ArticleCards from './_components/ArticleCards';
-import { Gradient, Result } from '@/lib/types';
+import { Gradient, Loading, Result } from '@/lib/types';
 import AccuracyThumbnail from './_components/AccuracyThumbnail';
 import { useResultStore } from '@/lib/store';
 import { useEffect, useState } from 'react';
 import { useAccuracyStore } from '@/lib/AccuracyStore';
+import { useLoadingStore } from '@/lib/LoadingStore';
 
 const Result = ({
   searchParams,
@@ -18,6 +19,7 @@ const Result = ({
   const [result, setResult] = useState<Result>();
   const setAccuracy = useAccuracyStore((state) => state.setAccuracy);
   const accuracy = useAccuracyStore((state) => state.accuracy);
+  const setLoading = useLoadingStore((state) => state.setLoading);
 
   useEffect(() => {
     const results = useResultStore.getState().results;
@@ -27,6 +29,8 @@ const Result = ({
       : results[results.length - 1] || null;
 
     setResult(foundResult?.data);
+    // done -> before: 뒤로가기 했을 때 로딩창이 아닌 메인페이지로 이동
+    setLoading(Loading.before);
   }, [searchParams.id]);
 
   useEffect(() => {
