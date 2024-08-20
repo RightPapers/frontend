@@ -1,9 +1,10 @@
+import { Gradient } from '@/lib/types';
 import { useEffect, useState } from 'react';
 
 interface DashboardColor {
   accuracy: string;
   resultText: string;
-  background: string;
+  gradient: Gradient;
 }
 
 export default function useAccuracyTheme(accuracy: number) {
@@ -13,7 +14,7 @@ export default function useAccuracyTheme(accuracy: number) {
   const [dashboardColor, setDashboardColor] = useState<DashboardColor>({
     accuracy: '',
     resultText: '',
-    background: '',
+    gradient: Gradient.red,
   });
 
   useEffect(() => {
@@ -22,21 +23,21 @@ export default function useAccuracyTheme(accuracy: number) {
       setDashboardColor({
         accuracy: 'text-destructive',
         resultText: 'text-white',
-        background: 'bg-destructive',
+        gradient: Gradient.red,
       });
     } else if (accuracy <= 70) {
       setResultText('사실 여부 판별이 어렵습니다');
       setDashboardColor({
         accuracy: 'text-black',
         resultText: 'text-black',
-        background: 'bg-secondary',
+        gradient: Gradient.none,
       });
     } else {
       setResultText('대체로 사실입니다');
       setDashboardColor({
         accuracy: 'text-primary',
         resultText: 'text-white',
-        background: 'bg-primary',
+        gradient: Gradient.blue,
       });
     }
     // 0 ~ 100 -> -135 ~ 135 (accuracy -> rotateDegree)

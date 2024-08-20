@@ -5,7 +5,7 @@ import { YoutubeInfo } from '@/lib/types';
 const AccuracyThumbnail = ({ youtube_info }: { youtube_info: YoutubeInfo }) => {
   const { thumbnails, video_title } = youtube_info;
   return (
-    <div className='relative h-64 w-full overflow-hidden rounded-3xl'>
+    <div className='relative z-20 h-64 w-full overflow-hidden rounded-3xl'>
       <Image
         src={thumbnails}
         alt={video_title}

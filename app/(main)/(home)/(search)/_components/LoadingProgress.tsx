@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import { Progress } from '@/components/ui/progress';
 import Logo from '@/public/assets/right-paper-logo.svg';
 import { useRouter } from 'next/navigation';
-import { LoadingState } from '@/lib/types';
+import { Loading } from '@/lib/types';
+import { useLoadingStore } from '@/lib/LoadingStore';
 
 const getRandomIntBetween = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -21,18 +22,15 @@ const points = [
   99,
 ];
 
-export default function LoadingProgress({
-  loadingState,
-}: {
-  loadingState: LoadingState;
-}) {
+export default function LoadingProgress() {
+  const loading = useLoadingStore((state) => state.loading);
   const [progress, setProgress] = useState<number>(0);
 
   const router = useRouter();
 
   useEffect(() => {
     // fetching이 완료되면 99 -> 100
-    if (loadingState === LoadingState.done) {
+    if (loading === Loading.done) {
       setProgress(100);
       // 100%가 된 것을 1초 보여주고 result 페이지로 이동
       const timeout = setTimeout(() => {
@@ -41,7 +39,7 @@ export default function LoadingProgress({
       return () => clearTimeout(timeout);
     }
 
-    if (loadingState !== LoadingState.start) return;
+    if (loading !== Loading.start) return;
 
     let index = 0;
 
@@ -59,7 +57,7 @@ export default function LoadingProgress({
     }, 1500);
 
     return () => clearInterval(interval);
-  }, [loadingState]);
+  }, [loading]);
 
   return (
     <div className='relative flex flex-col items-center text-center font-bold text-primary'>

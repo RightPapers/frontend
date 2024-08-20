@@ -1,14 +1,20 @@
-export enum LoadingState {
+export enum Loading {
   before,
   start,
   done,
 }
 
-export interface RelatedArticle {
+export interface Article {
   description: string;
   link: string;
   pubDate: string;
   title: string;
+}
+
+export interface RelatedArticles {
+  first_news: Article;
+  second_news: Article;
+  third_news: Article;
 }
 
 export interface YoutubeInfo {
@@ -23,8 +29,15 @@ export interface AnalysisResult {
   summary: string;
 }
 
-export interface Result {
+export interface ResultData {
   analysis_result: AnalysisResult;
-  related_articles: RelatedArticle[];
+  related_articles: RelatedArticles;
   youtube_info: YoutubeInfo;
+}
+
+export enum Gradient {
+  none = 'none',
+  red = 'linear-gradient(240.22deg, #e73737 0%, #b23232 100%)',
+  orange = 'linear-gradient(240.22deg, #FF9401 0%, #AD6400 100%)',
+  blue = 'linear-gradient(240.22deg, #054AA8 0%, #002354 100%)',
 }

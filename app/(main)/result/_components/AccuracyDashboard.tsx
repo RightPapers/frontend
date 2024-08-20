@@ -20,7 +20,7 @@ const AccuracyDashboard = () => {
         />
         <span
           className={cn(
-            'absolute inset-y-[120px] text-3xl font-bold',
+            'absolute inset-y-[116px] text-4xl font-semibold',
             dashboardColor.accuracy
           )}
         >
@@ -29,10 +29,10 @@ const AccuracyDashboard = () => {
       </div>
       <span
         className={cn(
-          '-mb-4 flex h-10 w-52 -translate-y-4 items-center justify-center rounded-3xl text-sm font-bold',
-          dashboardColor.resultText,
-          dashboardColor.background
+          '-mb-4 flex h-11 w-52 -translate-y-4 items-center justify-center rounded-3xl bg-white text-sm font-extrabold',
+          dashboardColor.resultText
         )}
+        style={{ backgroundImage: dashboardColor.gradient }}
       >
         {resultText}
       </span>
