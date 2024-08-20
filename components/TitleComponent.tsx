@@ -1,37 +1,21 @@
 'use client';
 
 import { useAccuracyStore } from '@/lib/AccuracyStore';
+import { Gradient } from '@/lib/types';
 import { useEffect, useState } from 'react';
 
-interface Gradient {
-  left: string;
-  right: string;
-}
-
 const TitleComponent = ({ children }: { children: React.ReactNode }) => {
-  const [gradient, setGradient] = useState<Gradient>({
-    left: '',
-    right: '',
-  });
+  const [gradient, setGradient] = useState<Gradient>();
 
   const accuracy = useAccuracyStore((state) => state.accuracy);
 
   useEffect(() => {
     if (accuracy < 30) {
-      setGradient({
-        left: '#e73737',
-        right: '#b23232',
-      });
+      setGradient(Gradient.red);
     } else if (accuracy <= 70) {
-      setGradient({
-        left: '#FF9401',
-        right: '#AD6400',
-      });
+      setGradient(Gradient.orange);
     } else {
-      setGradient({
-        left: '#054AA8',
-        right: '#002354',
-      });
+      setGradient(Gradient.blue);
     }
   }, [accuracy]);
 
@@ -39,7 +23,7 @@ const TitleComponent = ({ children }: { children: React.ReactNode }) => {
     <div
       className='w-52 rounded-xl p-4 font-medium text-white'
       style={{
-        backgroundImage: `linear-gradient(240.22deg, ${gradient.left} 0%, ${gradient.right} 100%)`,
+        backgroundImage: gradient,
       }}
     >
       {children}

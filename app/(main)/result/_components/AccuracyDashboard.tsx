@@ -31,8 +31,8 @@ const AccuracyDashboard = () => {
         className={cn(
           '-mb-4 flex h-10 w-52 -translate-y-4 items-center justify-center rounded-3xl text-sm font-bold',
           dashboardColor.resultText,
-          dashboardColor.background
         )}
+        style={{ backgroundImage: dashboardColor.gradient }}
       >
         {resultText}
       </span>
