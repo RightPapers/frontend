@@ -5,6 +5,7 @@ import {
   TooltipTrigger,
 } from '@/components/ui/tooltip';
 import { Article } from '@/lib/types';
+import { dateFormatter } from '@/lib/utils';
 import { Tooltip } from '@radix-ui/react-tooltip';
 import Link from 'next/link';
 
@@ -19,7 +20,7 @@ const ArticleCard = ({ description, pubDate, title, link }: Article) => {
                 className='line-clamp-2 text-sm font-semibold'
                 dangerouslySetInnerHTML={{ __html: title }}
               />
-              <p className='text-xs text-gray-500'>{pubDate}</p>
+              <p className='text-xs text-gray-500'>{dateFormatter(pubDate)}</p>
               <p
                 className='line-clamp-3 text-sm'
                 dangerouslySetInnerHTML={{ __html: description }}

@@ -20,10 +20,9 @@ const Result = ({
   const setAccuracy = useAccuracyStore((state) => state.setAccuracy);
   const accuracy = useAccuracyStore((state) => state.accuracy);
   const setLoading = useLoadingStore((state) => state.setLoading);
+  const results = useResultStore.getState().results;
 
   useEffect(() => {
-    const results = useResultStore.getState().results;
-
     const foundResult = searchParams.id
       ? results.find((result) => result.id === searchParams.id)
       : results[results.length - 1] || null;
@@ -43,12 +42,18 @@ const Result = ({
     }
   }, [accuracy]);
 
+  useEffect(() => {
+    if (result) {
+      setAccuracy(
+        Math.floor(100 - result.analysis_result.fake_probability * 100)
+      );
+    }
+  }, [result, setAccuracy]);
+
   // TODO: 잘못된 ID로 접근하는 경우의 UI 추가
   if (!result) {
     return null;
   }
-
-  setAccuracy(100 - result.analysis_result.fake_probability);
 
   const { analysis_result, related_articles, youtube_info } = result;
 

@@ -30,8 +30,8 @@ export async function POST(request: Request) {
   const { title: video_title, author_name: channel_title } =
     await response.json();
 
-  // fake_possibility is randomly generated between 1~99
-  let fake_probability = Math.floor(Math.random() * 99) + 1;
+  // fake_possibility is randomly generated between 0.01~0.99
+  let fake_probability = Math.random() * 0.98 + 0.01;
 
   return NextResponse.json({
     analysis_result: {
@@ -59,7 +59,7 @@ export async function POST(request: Request) {
         description:
           '이에 KAI는 FA-50 추가 수출은 물론 KF-21 <b>전투기</b>, 국산 헬기 수리온, 경공격헬기(LAH) 등에 대한 추가적인 사업... <b>러시아 군용</b>기술의 핵심 공급업체가 비우호적 국가들에 편중되어 있다는 점도 어려움을 가중시키는... ',
         link: 'http://weekly.chosun.com/news/articleView.html?idxno=30252',
-        pubDate: 'Sun, 19 Nov 2023 07:01:00 +0900',
+        pubDate: 'Tue, 20 Aug 2024 17:01:00 +0900',
         title: 'K방산은 진짜 날개를 달았나?',
       },
     },
