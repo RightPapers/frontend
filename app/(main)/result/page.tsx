@@ -55,11 +55,12 @@ const Result = ({
   return (
     <>
       <div
-        className='absolute top-0 h-72 w-full bg-world-map-white'
+        className='absolute top-0 h-72 w-full'
         style={{
           backgroundImage: gradient,
         }}
       />
+      <div className='absolute top-0 z-10 h-72 w-full bg-world-map-white' />
       <div className='flex flex-col gap-6 p-5'>
         <div className='z-10 line-clamp-2 text-4xl font-bold text-white'>
           {youtube_info.video_title}
