@@ -29,7 +29,7 @@ export interface AnalysisResult {
   summary: string;
 }
 
-export interface Result {
+export interface ResultData {
   analysis_result: AnalysisResult;
   related_articles: RelatedArticles;
   youtube_info: YoutubeInfo;

@@ -3,7 +3,6 @@
 import HistoryCard from '@/components/HistoryCard';
 import { useResultStore } from '@/lib/store';
 import { YoutubeInfo } from '@/lib/types';
-import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import NavigatorHeader from '../NavigatorHeader';
 

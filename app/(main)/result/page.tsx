@@ -3,7 +3,7 @@
 import FeedbackCard from './_components/FeedbackCard';
 import SummaryCard from './_components/SummaryCard';
 import ArticleCards from './_components/ArticleCards';
-import { Gradient, Loading, Result } from '@/lib/types';
+import { Gradient, Loading, ResultData } from '@/lib/types';
 import AccuracyThumbnail from './_components/AccuracyThumbnail';
 import { useResultStore } from '@/lib/store';
 import { useEffect, useState } from 'react';
@@ -16,7 +16,7 @@ const Result = ({
   searchParams: { id: string | undefined };
 }) => {
   const [gradient, setGradient] = useState<Gradient>();
-  const [result, setResult] = useState<Result>();
+  const [result, setResult] = useState<ResultData>();
   const setAccuracy = useAccuracyStore((state) => state.setAccuracy);
   const accuracy = useAccuracyStore((state) => state.accuracy);
   const setLoading = useLoadingStore((state) => state.setLoading);

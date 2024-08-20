@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import CardComponent from '@/components/CardComponent';
-import { Loading, Result } from '@/lib/types';
+import { Loading, ResultData } from '@/lib/types';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -25,13 +25,13 @@ const formSchema = z.object({
 // TODO: 추후 Flask 서버로부터의 페칭으로 수정
 const fetchData = async (
   url: string,
-  addResult: (video_id: string, result: Result) => void
+  addResult: (video_id: string, result: ResultData) => void
 ) => {
   const res = await fetch('api/analyze', {
     method: 'POST',
     body: JSON.stringify({ url }),
   });
-  const result: Result = await res.json();
+  const result: ResultData = await res.json();
   addResult(result.youtube_info.video_id, result);
   // 데이터 페칭이 6초 ~ 15초 사이 랜덤하게 걸린다고 가정
   await new Promise((resolve) =>
