@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from 'react';
 import LoadingProgress from './_components/LoadingProgress';
 import { LoadingState } from '@/lib/types';
 import HistoryCards from './_components/history/HistoryCards';
-import MainHeader from './_components/MainHeader';
 import LinkCard from './_components/input/LinkCard';
 import HelpCard from './_components/help/HelpCard';
 import { useAnimate } from 'framer-motion';
@@ -36,12 +35,11 @@ const Home = () => {
   }, [showHelpModal, animate, scope]);
 
   return (
-    <>
+    <div className='z-10'>
       {isLoading ? (
         <LoadingProgress loadingState={loadingState} />
       ) : (
         <>
-          <MainHeader />
           {showHelpModal ? (
             <HelpCard handleShowHelp={handleShowHelp} ref={scope} />
           ) : (
@@ -54,7 +52,7 @@ const Home = () => {
           {!showHelpModal && <HistoryCards />}
         </>
       )}
-    </>
+    </div>
   );
 };
 

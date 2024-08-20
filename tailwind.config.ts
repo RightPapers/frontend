@@ -23,6 +23,7 @@ const config = {
     extend: {
       backgroundImage: {
         'world-map': "url('/assets/world-map.svg')",
+        'world-map-white': "url('/assets/world-map-white.svg')",
       },
       colors: {
         border: 'hsl(var(--border))',

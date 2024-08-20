@@ -35,7 +35,7 @@ const History = () => {
   };
 
   return (
-    <CardComponent>
+    <CardComponent className='z-10'>
       <div className='flex justify-between'>
         <p className='font-bold text-primary'>전체 검색 기록</p>
         <Popover open={popoverOpen} onOpenChange={setPopoverOpen}>

@@ -4,28 +4,20 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { RelatedArticle } from '@/lib/types';
 import { Tooltip } from '@radix-ui/react-tooltip';
+import Link from 'next/link';
 
-const ArticleCard = ({
-  source,
-  upload_time,
-  title,
-  link,
-}: {
-  source: string;
-  upload_time: string;
-  title: string;
-  link: string;
-}) => {
+const ArticleCard = ({ description, pubDate, title, link }: RelatedArticle) => {
   return (
-    <a href={link}>
+    <Link href={link}>
       <CardComponent className='py-5'>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger className='flex flex-col gap-2 text-left'>
               <div>
-                <p className='text-sm font-semibold'>{source}</p>
-                <p className='text-xs text-gray-500'>{upload_time}</p>
+                <p className='text-sm font-semibold'>{description}</p>
+                <p className='text-xs text-gray-500'>{pubDate}</p>
               </div>
               <p className='line-clamp-2 text-sm'>{title}</p>
             </TooltipTrigger>
@@ -35,7 +27,7 @@ const ArticleCard = ({
           </Tooltip>
         </TooltipProvider>
       </CardComponent>
-    </a>
+    </Link>
   );
 };
 
