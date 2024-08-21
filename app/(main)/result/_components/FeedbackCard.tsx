@@ -10,7 +10,7 @@ import { useState } from 'react';
 import TitleComponent from '@/components/TitleComponent';
 import { RiQuestionnaireLine } from 'react-icons/ri';
 
-const FeedbackCard = () => {
+const FeedbackCard = ({ video_id }: { video_id: string }) => {
   const { toast } = useToast();
   const [open, setOpen] = useState<boolean>(false);
 
@@ -30,7 +30,6 @@ const FeedbackCard = () => {
             variant='icon'
             className='bg-primary text-primary-foreground hover:bg-primary/90'
             onClick={() => {
-              // TODO: API 연결
               toast({
                 title: '감사합니다!',
                 description: 'Right Paper를 이용해 주셔서 감사합니다.',
@@ -46,7 +45,7 @@ const FeedbackCard = () => {
                 아니요
               </Button>
             </DialogTrigger>
-            <FeedbackDialog setOpen={setOpen} />
+            <FeedbackDialog setOpen={setOpen} video_id={video_id} />
           </Dialog>
         </div>
       </CardComponent>

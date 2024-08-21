@@ -5,5 +5,6 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  return NextResponse.json({ message: '피드백 감사합니다!' });
+  const { video_id, feedback_text } = await request.json();
+  return NextResponse.json({ video_id, feedback_text });
 }
