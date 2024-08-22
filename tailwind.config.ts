@@ -11,7 +11,7 @@ const config = {
   prefix: '',
   theme: {
     screens: {
-      mobile: { max: '430px' },
+      mobile: { max: '384px' },
     },
     container: {
       center: true,
@@ -67,7 +67,7 @@ const config = {
         button: '10px',
       },
       maxWidth: {
-        mobile: '384px',
+        mobile: '430px',
       },
       keyframes: {
         'accordion-down': {
