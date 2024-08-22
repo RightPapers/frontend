@@ -11,7 +11,7 @@ const config = {
   prefix: '',
   theme: {
     screens: {
-      mobile: { max: '384px' },
+      mobile: { max: '430px' },
     },
     container: {
       center: true,
