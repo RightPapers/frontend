@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import CardComponent from '@/components/CardComponent';
-import { Loading, ResultData } from '@/lib/types';
+import { Loading } from '@/lib/types';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -13,15 +13,8 @@ import NavigatorHeader from '../NavigatorHeader';
 import MainInput from './MainInput';
 import { forwardRef } from 'react';
 import { useLoadingStore } from '@/lib/LoadingStore';
-import { useToast } from '@/components/ui/use-toast';
-
-const youtubeUrlPattern = /^(https?:\/\/)?(www\.)?(youtu\.be|youtube\.com)/;
-
-const formSchema = z.object({
-  url: z.string().regex(youtubeUrlPattern, {
-    message: '유효한 유튜브 링크를 입력해주세요.',
-  }),
-});
+import { fetchAnalyze } from '../../_utils/fetchAnalyze';
+import { analyzeSchema } from '../../_utils/analyzeSchema';
 
 const LinkComponent = forwardRef(
   (
@@ -35,47 +28,14 @@ const LinkComponent = forwardRef(
     const { addResult } = useResultStore();
     const setLoading = useLoadingStore((state) => state.setLoading);
 
-    const { toast } = useToast();
-
-    const form = useForm<z.infer<typeof formSchema>>({
-      resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof analyzeSchema>>({
+      resolver: zodResolver(analyzeSchema),
       defaultValues: { url: '' },
     });
 
-    // TODO: 추후 Flask 서버로부터의 페칭으로 수정, Promise 제거
-    const fetchData = async (
-      url: string,
-      addResult: (video_id: string, result: ResultData) => void
-    ) => {
-      try {
-        const res = await fetch('api/analyze', {
-          method: 'POST',
-          body: JSON.stringify({ url }),
-        });
-        // 데이터 페칭이 6초 ~ 15초 사이 랜덤하게 걸린다고 가정
-        await new Promise((resolve) =>
-          setTimeout(resolve, Math.random() * 9000 + 6000)
-        );
-        if (!res.ok) {
-          throw new Error('서버에서 오류가 발생했습니다.');
-        } else {
-          const result: ResultData = await res.json();
-          addResult(result.youtube_info.video_id, result);
-          setLoading(Loading.done);
-        }
-      } catch (error) {
-        setLoading(Loading.before);
-        toast({
-          title: '영상 분석 실패',
-          description: '잠시 후 다시 시도해주세요.',
-          variant: 'destructive',
-        });
-      }
-    };
-
-    const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    const onSubmit = async (data: z.infer<typeof analyzeSchema>) => {
       setLoading(Loading.start);
-      await fetchData(data.url, addResult);
+      await fetchAnalyze(data.url, addResult);
     };
 
     return (
