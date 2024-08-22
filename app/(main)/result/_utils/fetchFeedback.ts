@@ -5,7 +5,7 @@ import { UseFormSetValue } from 'react-hook-form';
 export const fetchFeedback = async (
   video_id: string,
   feedback_text: string,
-  setValue: UseFormSetValue<{ feedback_text: string; }>
+  setValue: UseFormSetValue<{ feedback_text: string }>
 ) => {
   const { toast } = useToast();
   try {
