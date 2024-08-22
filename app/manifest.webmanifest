@@ -2,6 +2,8 @@
   "name": "Right Paper",
   "description": "Youtube Fake News Detect Service",
   "short_name": "Right Paper",
+  "background_color": "#fff",
+  "theme_color": "#fff",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
