@@ -11,7 +11,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 
 const formSchema = z.object({
-  feedback_text: z.string().max(200),
+  feedback_text: z.string().max(200, '200자 이내로 입력해주세요.'),
 });
 
 const FeedbackDialog = ({
@@ -25,11 +25,29 @@ const FeedbackDialog = ({
 
   // TODO: 추후 Flask 서버로부터의 페칭으로 수정
   const fetchData = async (feedback_text: string) => {
-    const res = await fetch('api/feedback', {
-      method: 'POST',
-      body: JSON.stringify({ video_id, feedback_text }),
-    });
-    console.log(await res.json());
+    try {
+      const res = await fetch('api/feedback', {
+        method: 'POST',
+        body: JSON.stringify({ video_id, feedback_text }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!res.ok) {
+        throw new Error('서버에서 오류가 발생했습니다.');
+      }
+      toast({
+        title: '의견 감사합니다!',
+        description: '귀하의 의견이 성공적으로 전달되었습니다.',
+      });
+      setValue('feedback_text', '');
+    } catch (error) {
+      toast({
+        title: '의견 전송 실패',
+        description: '잠시 후 다시 시도해주세요.',
+        variant: 'destructive',
+      });
+    }
   };
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -40,11 +58,6 @@ const FeedbackDialog = ({
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     fetchData(data.feedback_text);
-    toast({
-      title: '의견 감사합니다!',
-      description: '귀하의 의견이 성공적으로 전달되었습니다.',
-    });
-    setValue('feedback_text', '');
     setOpen(false);
   };
 
