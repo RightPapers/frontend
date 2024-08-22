@@ -5,14 +5,11 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { Textarea } from '@/components/ui/textarea';
-import { useToast } from '@/components/ui/use-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-
-const formSchema = z.object({
-  feedback_text: z.string().max(200, '200자 이내로 입력해주세요.'),
-});
+import { fetchFeedback } from '../_utils/fetchFeedback';
+import { feedbackSchema } from '../_utils/feedbackSchema';
 
 const FeedbackDialog = ({
   setOpen,
@@ -21,44 +18,14 @@ const FeedbackDialog = ({
   setOpen: (open: boolean) => void;
   video_id: string;
 }) => {
-  const { toast } = useToast();
-
-  // TODO: 추후 Flask 서버로부터의 페칭으로 수정
-  const fetchData = async (feedback_text: string) => {
-    try {
-      const res = await fetch('api/feedback', {
-        method: 'POST',
-        body: JSON.stringify({ video_id, feedback_text }),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
-      if (!res.ok) {
-        throw new Error('서버에서 오류가 발생했습니다.');
-      } else {
-        toast({
-          title: '의견 감사합니다!',
-          description: '귀하의 의견이 성공적으로 전달되었습니다.',
-        });
-        setValue('feedback_text', '');
-      }
-    } catch (error) {
-      toast({
-        title: '의견 전송 실패',
-        description: '잠시 후 다시 시도해주세요.',
-        variant: 'destructive',
-      });
-    }
-  };
-
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof feedbackSchema>>({
+    resolver: zodResolver(feedbackSchema),
   });
 
   const { handleSubmit, register, setValue } = form;
 
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    fetchData(data.feedback_text);
+  const onSubmit = async (data: z.infer<typeof feedbackSchema>) => {
+    fetchFeedback(video_id, data.feedback_text, setValue);
     setOpen(false);
   };
 
