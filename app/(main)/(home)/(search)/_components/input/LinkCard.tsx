@@ -15,6 +15,7 @@ import { forwardRef } from 'react';
 import { useLoadingStore } from '@/lib/LoadingStore';
 import { fetchAnalyze } from '../../_utils/fetchAnalyze';
 import { analyzeSchema } from '../../_utils/analyzeSchema';
+import { useToast } from '@/components/ui/use-toast';
 
 const LinkComponent = forwardRef(
   (
@@ -28,6 +29,8 @@ const LinkComponent = forwardRef(
     const { addResult } = useResultStore();
     const setLoading = useLoadingStore((state) => state.setLoading);
 
+    const { toast } = useToast();
+
     const form = useForm<z.infer<typeof analyzeSchema>>({
       resolver: zodResolver(analyzeSchema),
       defaultValues: { url: '' },
@@ -35,7 +38,7 @@ const LinkComponent = forwardRef(
 
     const onSubmit = async (data: z.infer<typeof analyzeSchema>) => {
       setLoading(Loading.start);
-      await fetchAnalyze(data.url, addResult);
+      await fetchAnalyze(data.url, addResult, toast, setLoading);
     };
 
     return (

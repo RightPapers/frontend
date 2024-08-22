@@ -1,14 +1,12 @@
-import { useToast } from '@/components/ui/use-toast';
-import { useLoadingStore } from '@/lib/LoadingStore';
 import { Loading, ResultData } from '@/lib/types';
 
 // TODO: 추후 Flask 서버로부터의 페칭으로 수정, Promise 제거
 export const fetchAnalyze = async (
   url: string,
-  addResult: (video_id: string, result: ResultData) => void
+  addResult: (video_id: string, result: ResultData) => void,
+  toast: any,
+  setLoading: (loading: Loading) => void
 ) => {
-  const { toast } = useToast();
-  const setLoading = useLoadingStore((state) => state.setLoading);
   try {
     const res = await fetch('api/analyze', {
       method: 'POST',

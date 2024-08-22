@@ -1,13 +1,12 @@
-import { useToast } from '@/components/ui/use-toast';
 import { UseFormSetValue } from 'react-hook-form';
 
 // TODO: 추후 Flask 서버로부터의 페칭으로 수정
 export const fetchFeedback = async (
   video_id: string,
   feedback_text: string,
-  setValue: UseFormSetValue<{ feedback_text: string }>
+  setValue: UseFormSetValue<{ feedback_text: string }>,
+  toast: any
 ) => {
-  const { toast } = useToast();
   try {
     const res = await fetch('api/feedback', {
       method: 'POST',

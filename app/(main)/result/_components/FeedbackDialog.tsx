@@ -10,6 +10,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { fetchFeedback } from '../_utils/fetchFeedback';
 import { feedbackSchema } from '../_utils/feedbackSchema';
+import { useToast } from '@/components/ui/use-toast';
 
 const FeedbackDialog = ({
   setOpen,
@@ -24,8 +25,10 @@ const FeedbackDialog = ({
 
   const { handleSubmit, register, setValue } = form;
 
+  const { toast } = useToast();
+
   const onSubmit = async (data: z.infer<typeof feedbackSchema>) => {
-    fetchFeedback(video_id, data.feedback_text, setValue);
+    fetchFeedback(video_id, data.feedback_text, setValue, toast);
     setOpen(false);
   };
 
