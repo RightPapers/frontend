@@ -4,17 +4,11 @@ export enum Loading {
   done,
 }
 
-export interface Article {
+export interface RelatedArticle {
   description: string;
   link: string;
   pubDate: string;
   title: string;
-}
-
-export interface RelatedArticles {
-  first_news: Article;
-  second_news: Article;
-  third_news: Article;
 }
 
 export interface YoutubeInfo {
@@ -31,7 +25,7 @@ export interface AnalysisResult {
 
 export interface ResultData {
   analysis_result: AnalysisResult;
-  related_articles: RelatedArticles;
+  related_articles: RelatedArticle[];
   youtube_info: YoutubeInfo;
 }
 

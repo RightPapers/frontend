@@ -4,12 +4,12 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
-import { Article } from '@/lib/types';
+import { RelatedArticle } from '@/lib/types';
 import { dateFormatter } from '@/lib/utils';
 import { Tooltip } from '@radix-ui/react-tooltip';
 import Link from 'next/link';
 
-const ArticleCard = ({ description, pubDate, title, link }: Article) => {
+const ArticleCard = ({ description, pubDate, title, link }: RelatedArticle) => {
   return (
     <Link href={link}>
       <CardComponent className='py-5'>
