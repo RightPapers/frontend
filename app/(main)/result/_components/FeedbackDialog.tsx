@@ -35,12 +35,13 @@ const FeedbackDialog = ({
       });
       if (!res.ok) {
         throw new Error('서버에서 오류가 발생했습니다.');
+      } else {
+        toast({
+          title: '의견 감사합니다!',
+          description: '귀하의 의견이 성공적으로 전달되었습니다.',
+        });
+        setValue('feedback_text', '');
       }
-      toast({
-        title: '의견 감사합니다!',
-        description: '귀하의 의견이 성공적으로 전달되었습니다.',
-      });
-      setValue('feedback_text', '');
     } catch (error) {
       toast({
         title: '의견 전송 실패',
