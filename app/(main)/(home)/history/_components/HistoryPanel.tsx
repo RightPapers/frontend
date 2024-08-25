@@ -23,7 +23,7 @@ const HistoryPanel = (history: YoutubeInfo) => {
         height={64}
         className='h-16 w-28 rounded-lg object-cover'
       />
-      <div className='max-w-40 mobile:max-w-32'>
+      <div className='max-w-[166px] mobile:max-w-32'>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger className='w-full'>

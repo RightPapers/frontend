@@ -73,7 +73,7 @@ const Result = ({
         <AccuracyThumbnail youtube_info={youtube_info} />
         <SummaryCard summary={analysis_result.summary} />
         <ArticleCards articles={related_articles} />
-        <FeedbackCard />
+        <FeedbackCard video_id={youtube_info.video_id} />
       </div>
     </>
   );

@@ -67,7 +67,7 @@ const config = {
         button: '10px',
       },
       maxWidth: {
-        mobile: '384px',
+        mobile: '430px',
       },
       keyframes: {
         'accordion-down': {

@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import CardComponent from '@/components/CardComponent';
-import { Loading, ResultData } from '@/lib/types';
+import { Loading } from '@/lib/types';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -13,31 +13,9 @@ import NavigatorHeader from '../NavigatorHeader';
 import MainInput from './MainInput';
 import { forwardRef } from 'react';
 import { useLoadingStore } from '@/lib/LoadingStore';
-
-const youtubeUrlPattern = /^(https?:\/\/)?(www\.)?(youtu\.be|youtube\.com)/;
-
-const formSchema = z.object({
-  url: z.string().regex(youtubeUrlPattern, {
-    message: '유효한 유튜브 링크를 입력해주세요.',
-  }),
-});
-
-// TODO: 추후 Flask 서버로부터의 페칭으로 수정
-const fetchData = async (
-  url: string,
-  addResult: (video_id: string, result: ResultData) => void
-) => {
-  const res = await fetch('api/analyze', {
-    method: 'POST',
-    body: JSON.stringify({ url }),
-  });
-  const result: ResultData = await res.json();
-  addResult(result.youtube_info.video_id, result);
-  // 데이터 페칭이 6초 ~ 15초 사이 랜덤하게 걸린다고 가정
-  await new Promise((resolve) =>
-    setTimeout(resolve, Math.random() * 9000 + 6000)
-  );
-};
+import { fetchAnalyze } from '../../_utils/fetchAnalyze';
+import { analyzeSchema } from '../../_utils/analyzeSchema';
+import { useToast } from '@/components/ui/use-toast';
 
 const LinkComponent = forwardRef(
   (
@@ -51,15 +29,16 @@ const LinkComponent = forwardRef(
     const { addResult } = useResultStore();
     const setLoading = useLoadingStore((state) => state.setLoading);
 
-    const form = useForm<z.infer<typeof formSchema>>({
-      resolver: zodResolver(formSchema),
+    const { toast } = useToast();
+
+    const form = useForm<z.infer<typeof analyzeSchema>>({
+      resolver: zodResolver(analyzeSchema),
       defaultValues: { url: '' },
     });
 
-    const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    const onSubmit = async (data: z.infer<typeof analyzeSchema>) => {
       setLoading(Loading.start);
-      await fetchData(data.url, addResult);
-      setLoading(Loading.done);
+      await fetchAnalyze(data.url, addResult, toast, setLoading);
     };
 
     return (
