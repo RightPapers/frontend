@@ -1,7 +1,6 @@
 import { baseUrl } from '@/lib/constants';
 import { Loading, ResultData } from '@/lib/types';
 
-// TODO: 추후 Flask 서버로부터의 페칭으로 수정, Promise 제거
 export const fetchAnalyze = async (
   url: string,
   addResult: (video_id: string, result: ResultData) => void,
@@ -13,10 +12,6 @@ export const fetchAnalyze = async (
       method: 'POST',
       body: JSON.stringify({ url }),
     });
-    // 데이터 페칭이 6초 ~ 15초 사이 랜덤하게 걸린다고 가정
-    await new Promise((resolve) =>
-      setTimeout(resolve, Math.random() * 9000 + 6000)
-    );
     if (!res.ok) {
       throw new Error('서버에서 오류가 발생했습니다.');
     } else {
