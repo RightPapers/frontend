@@ -11,6 +11,9 @@ export const fetchAnalyze = async (
     const res = await fetch(`${baseUrl}/analyze`, {
       method: 'POST',
       body: JSON.stringify({ url }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
     if (!res.ok) {
       throw new Error('서버에서 오류가 발생했습니다.');
