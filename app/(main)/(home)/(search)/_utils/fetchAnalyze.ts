@@ -1,3 +1,4 @@
+import { baseUrl } from '@/lib/constants';
 import { Loading, ResultData } from '@/lib/types';
 
 // TODO: 추후 Flask 서버로부터의 페칭으로 수정, Promise 제거
@@ -8,7 +9,7 @@ export const fetchAnalyze = async (
   setLoading: (loading: Loading) => void
 ) => {
   try {
-    const res = await fetch('api/analyze', {
+    const res = await fetch(`${baseUrl}/analyze`, {
       method: 'POST',
       body: JSON.stringify({ url }),
     });

@@ -1,4 +1,5 @@
 import { UseFormSetValue } from 'react-hook-form';
+import { baseUrl } from '@/lib/constants';
 
 // TODO: 추후 Flask 서버로부터의 페칭으로 수정
 export const fetchFeedback = async (
@@ -8,7 +9,7 @@ export const fetchFeedback = async (
   toast: any
 ) => {
   try {
-    const res = await fetch('api/feedback', {
+    const res = await fetch(`${baseUrl}/feedback`, {
       method: 'POST',
       body: JSON.stringify({ video_id, feedback_text }),
       headers: {
