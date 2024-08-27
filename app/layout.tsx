@@ -8,6 +8,19 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata: Metadata = {
   title: 'Right Paper',
   description: 'Youtube Fake News Detect Service',
+  openGraph: {
+    title: 'Right Paper',
+    description: 'Youtube Fake News Detect Service',
+    url: 'https://right-paper.vercel.app/',
+    images: [
+      {
+        url: '/apple-icon.png',
+        alt: 'Right Paper logo which symbolizes a dashboard',
+      },
+    ],
+    siteName: 'Right Paper',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
