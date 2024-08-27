@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     url: 'https://right-paper.vercel.app/',
     images: [
       {
-        url: '/apple-icon.png',
+        url: '/android-chrome-512x512.png',
         alt: 'Right Paper logo which symbolizes a dashboard',
       },
     ],
