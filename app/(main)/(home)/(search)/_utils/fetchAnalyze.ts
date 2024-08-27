@@ -15,6 +15,10 @@ export const fetchAnalyze = async (
         'Content-Type': 'application/json',
       },
     });
+    // 데이터 페칭이 6초 ~ 15초 사이 랜덤하게 걸린다고 가정
+    await new Promise((resolve) =>
+      setTimeout(resolve, Math.random() * 9000 + 6000)
+    );
     if (!res.ok) {
       throw new Error('서버에서 오류가 발생했습니다.');
     } else {
